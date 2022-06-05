@@ -1,4 +1,5 @@
 import pygame
+from support import import_folder
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos):
@@ -13,7 +14,16 @@ class Player(pygame.sprite.Sprite):
         self.gravity = 0.8
         self.jump_speed = -16 #neagtive b/c player jumps UP
 
+    def import_character_assests(self):
+        character_path = '../graphics/character/'
+        self.animations = {'idle':[],
+                           'run':[], 
+                           'jump':[], 
+                           'fall':[]}
         
+        for animation in self.animations.keys():
+            full_path = character_path + animation
+            self.animations[animation] = import_folder(full_path)
     def get_input(self):
         keys = pygame.key.get_pressed()
         
@@ -36,5 +46,3 @@ class Player(pygame.sprite.Sprite):
     
     def update(self):
         self.get_input()
-        self.rect.x += self.direction.x * self.speed
-        self.apply_gravity()
