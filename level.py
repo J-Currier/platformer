@@ -63,9 +63,17 @@ class Level:
                 if player.direction.y < 0 :
                     player.rect.top = sprite.rect.bottom
                     player.direction.y = 0
+                    player.on_ceiling = True
                 elif player.direction.y > 0 : #downward movement
                     player.rect.bottom = sprite.rect.top
                     player.direction.y = 0 #stops gravity from compunding if player is motionless
+                    player.on_ground = True
+                    
+        if player.on_ground and player.direction.y < 0 or player.direction.y > 1:
+            '''checking if player is jumping or falling and switching of on ground'''
+            player.on_ground = False
+        if player.on_ceiling and player.direction.y > 0:
+            player.on_ceiling = False
                 
    
         
