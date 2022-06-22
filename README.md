@@ -17,4 +17,5 @@ tutorial @ https://www.youtube.com/watch?v=YWN8GcmJ-jA *2:19:23
 ~1:10 taking image and writing to surface reveiw for ground images
 1:16:45
 1:24:24
+1:34:17
 
