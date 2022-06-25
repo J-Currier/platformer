@@ -18,4 +18,5 @@ tutorial @ https://www.youtube.com/watch?v=YWN8GcmJ-jA *2:19:23
 1:16:45
 1:24:24
 1:34:17
+1:38:54/reveiw slightly before to see if better solution
 

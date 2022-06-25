@@ -5,7 +5,6 @@ import os
 import pygame
 
 def import_folder(path):
-    print(path, "in import folder func")
     surface_list = []
 
     for _, __, img_file in os.walk(path):
