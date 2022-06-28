@@ -92,7 +92,7 @@ class Player(pygame.sprite.Sprite):
                 self.display_surface.blit(dust_particle, pos)
 
             else:
-                flipped_dust = pygame.transform.flip(dust_particle, True, False) #(surface, flip horiz., flip vert.)
+                flipped_dust = pygame.transform.flip(dust_particle, True, False) 
                 pos = self.rect.bottomright - pygame.math.Vector2(6, 10)
                 self.display_surface.blit(flipped_dust, pos)
                 

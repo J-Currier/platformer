@@ -23,3 +23,4 @@ bug to fix-> ~1:45 if up against a wall when jumping, when you land you teleport
 1:47:30
 1:52:51
 1:56:05
+1:59:04
