@@ -1,8 +1,10 @@
 from turtle import speed
 import pygame
+from particles import ParticleEffect
 from tiles import Tile
 from settings import tile_size, screen_width
 from player import Player
+from particles import ParticleEffect
 
 class Level:
     def __init__(self, level_data, surface):
@@ -11,7 +13,18 @@ class Level:
         self.setup_level(level_data)
         self.world_shift = 0
         self.current_x = 0
-     
+        
+        #dust
+        self.dust_sprite = pygame.sprite.GroupSingle()
+   
+    def create_jump_particles(self, pos):
+        if self.player.sprite.facing_right:
+            pos -= pygame.math.Vector2(10, 5)
+        else:
+            pos += pygame.math.Vector2(10, 5)
+            
+        jump_particle_sprite = ParticleEffect(pos, 'jump')
+        self.dust_sprite.add(jump_particle_sprite)
      
     def setup_level(self, layout):
         self.tiles = pygame.sprite.Group()
@@ -26,7 +39,7 @@ class Level:
                     tile = Tile((x, y), tile_size)
                     self.tiles.add(tile)
                 if cell == 'P':
-                    player_sprite = Player((x, y), self.display_surface)
+                    player_sprite = Player((x, y), self.display_surface, self.create_jump_particles) #LU passing a method to a child
                     self.player.add(player_sprite)
                     
     def scroll_x(self):
@@ -64,7 +77,6 @@ class Level:
         if player.on_right and (player.rect.right > self.current_x or player.direction.x <= 0):
             player.on_right = False
 
-
     def vertical_movement_collision(self):
         player = self.player.sprite
         player.apply_gravity()
@@ -85,11 +97,12 @@ class Level:
             player.on_ground = False
         if player.on_ceiling and player.direction.y > 0:
             player.on_ceiling = False
-                
-   
-        
-       
+                       
     def run(self):
+        #dust particles
+        self.dust_sprite.update(self.world_shift)
+        self.dust_sprite.draw(self.display_surface)
+        
         #level tiles
         self.tiles.update(self.world_shift)
         self.tiles.draw(self.display_surface)

@@ -4,6 +4,7 @@ from os import path
 
 class ParticleEffect(pygame.sprite.Sprite):
     def __init__(self, pos, type):
+        super().__init__()
         self.frame_index = 0
         self.animation_speed = 0.5
         if type == 'jump':
@@ -13,7 +14,7 @@ class ParticleEffect(pygame.sprite.Sprite):
             my_path = path.join("graphics", "character", "dust_particles", "land")
             self.frames = import_folder(my_path)
         self.image = self.frames[self.frame_index]
-        self.rect = self.image.get_Rect(center = pos)
+        self.rect = self.image.get_rect(center = pos)
         
     def animate(self):
         self.frame_index += self.animation_speed
