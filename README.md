@@ -20,4 +20,6 @@ tutorial @ https://www.youtube.com/watch?v=YWN8GcmJ-jA *2:19:23
 1:34:17
 1:38:54/reveiw slightly before to see if better solution
 bug to fix-> ~1:45 if up against a wall when jumping, when you land you teleport to the top of the wall (liekly due tyo the sword animation)
-
+1:47:30
+1:52:51
+1:56:05
