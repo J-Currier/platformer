@@ -3,6 +3,7 @@ import os
 #used to import folders using a file system (walk)
 #walk returns the directory path, directory names, filenames
 import pygame
+from csv import reader
 
 def import_folder(path):
     surface_list = []
@@ -17,3 +18,13 @@ def import_folder(path):
             surface_list.append(my_surface)
     return surface_list
         
+def import_csv_layout(myList):
+    path = os.path.join(*myList)
+    terrain_map = []
+    with open(path) as map:
+        level = reader(map, delimiter = ',')
+        for row in level:
+            terrain_map.append(list(row))
+        return terrain_map
+                    
+    

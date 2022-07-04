@@ -4,7 +4,18 @@ LU
 
 pygame.math.Vector2
 
-tutorial @ https://www.youtube.com/watch?v=YWN8GcmJ-jA *2:19:23
+*set up file structure 41:40 (gamedata)
+
+Tiled: mapeditor.org
+
+tutorial @ https://www.youtube.com/watch?v=wJMDh9QGRgs *3:09:23
+11:14-> create basic level
+15:27 
+32:02 _saving tiled file
+41:04
+
+
+tutorial @ hhttps://www.youtube.com/watch?v=wJMDh9QGRgs *3:09:23
 11:40
 16:14
 24:30
