@@ -6,6 +6,7 @@ from settings import tile_size, screen_width
 from player import Player
 from particles import ParticleEffect
 from support import import_csv_layout
+#from os import path
 
 class Level:
     def __init__(self, level_data, surface):
@@ -31,7 +32,10 @@ class Level:
                     x = item_index * tile_size
                     y = row_index * tile_size
                     
-                    if type == 'terrain':
+                    if type == 'terrain': 
+                        
+                        #['graphics', 'terrain',  'terrain_tiles.png']
+                        terrain_tile_list = import_cut_graphics('.../graphics/terrain/terrain_tiles.png')
                         sprite = Tile( (x, y), tile_size)
                         sprite_group.add(sprite)
             
@@ -141,10 +145,17 @@ class Level:
         self.dust_sprite.update(self.world_shift)
         self.dust_sprite.draw(self.display_surface)
         
-        #level tiles
+        #level tiles (vid1)
+        #remove? tiles.update
         self.tiles.update(self.world_shift)
-        self.tiles.draw(self.display_surface)
+        self.terrain_sprites.draw(self.display_surface)
+
+        #self.tiles.draw(self.display_surface)
+        #vid2
+        self.terrain_sprites.draw(self.display_surface)
+        self.terrain_sprites.update()
         self.scroll_x()
+
 
         #player sprite
         self.player.update()
