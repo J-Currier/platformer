@@ -7,14 +7,15 @@ pygame.math.Vector2
 *set up file structure 41:40 (gamedata)
 
 Tiled: mapeditor.org
-
+second video
 tutorial @ https://www.youtube.com/watch?v=wJMDh9QGRgs *3:09:23
 11:14-> create basic level
 15:27 
 32:02 _saving tiled file
 41:04
 1:05:45
-1:08:40
+1:08:40 
+1 18 25
 
 
 tutorial @ hhttps://www.youtube.com/watch?v=wJMDh9QGRgs *3:09:23
@@ -41,6 +42,6 @@ bug to fix-> ~1:45 if up against a wall when jumping, when you land you teleport
 2:11:38
 
 
-
+1:08:57******
 
 *44 minures level_0 dat

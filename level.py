@@ -5,7 +5,7 @@ from tiles import Tile
 from settings import tile_size, screen_width
 from player import Player
 from particles import ParticleEffect
-from support import import_csv_layout
+from support import import_csv_layout, import_cut_graphics
 #from os import path
 
 class Level:
@@ -33,9 +33,8 @@ class Level:
                     y = row_index * tile_size
                     
                     if type == 'terrain': 
-                        
-                        #['graphics', 'terrain',  'terrain_tiles.png']
-                        terrain_tile_list = import_cut_graphics('.../graphics/terrain/terrain_tiles.png')
+                        terrain_tile_list = import_cut_graphics('graphics', 'terrain', 'terrain_tiles.png')
+                        #terrain_tile_list = import_cut_graphics('..\graphics\terrain\terrain_tiles.png')
                         sprite = Tile( (x, y), tile_size)
                         sprite_group.add(sprite)
             
@@ -153,14 +152,20 @@ class Level:
         #self.tiles.draw(self.display_surface)
         #vid2
         self.terrain_sprites.draw(self.display_surface)
-        self.terrain_sprites.update()
-        self.scroll_x()
+        self.terrain_sprites.update(self.world_shift)
+        
 
 
         #player sprite
         self.player.update()
+        self.scroll_x()
         self.horizontal_movement_collision()
         self.get_player_on_ground() #checks if player on ground before vert collision
         self.vertical_movement_collision()
         self.create_landing_dust()
+        
+       
+        
         self.player.draw(self.display_surface)
+        
+        

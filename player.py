@@ -33,8 +33,9 @@ class Player(pygame.sprite.Sprite):
         self.on_right = False
         
     def import_character_assests(self):
+        print('imhere')
         my_path = path.join("graphics", "character")
-        character_path = '../graphics/character/'#changed
+        #character_path = '../graphics/character/'#changed
         self.animations = {'idle':[],
                            'run':[], 
                            'jump':[], 
@@ -42,6 +43,7 @@ class Player(pygame.sprite.Sprite):
         
         for animation in self.animations.keys():
             my_full_path = path.join(my_path, animation)
+            print(my_full_path, "myfullpath")
             #full_path = character_path + animation
             self.animations[animation] = import_folder(my_full_path)
 
