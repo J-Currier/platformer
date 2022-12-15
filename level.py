@@ -19,9 +19,13 @@ class Level:
         self.dust_sprite = pygame.sprite.GroupSingle()
         self.player_on_ground = False
 
-        #level arcitecture lu 
+        #terrain layout level arcitecture lu 
         terrain_layout= import_csv_layout(level_data['terrain'])
         self.terrain_sprites = self.create_tile_group(terrain_layout, 'terrain')
+        
+        #grass set up
+        grass_layout = import_csv_layout(level_data['grass'])
+        self.grass_sprites = self.create_tile_group(grass_layout, 'grass')
         
     def create_tile_group(self, layout, type):
         sprite_group = pygame.sprite.Group()
@@ -36,7 +40,15 @@ class Level:
                         terrain_tile_list = import_cut_graphics('graphics', 'terrain', 'terrain_tiles.png')
                         tile_surface = terrain_tile_list[int(item)]
                         sprite = StaticTile( (x, y), tile_size, tile_surface)
+                        
+                        
+                    if type == 'grass':
+                        grass_tile_list = import_cut_graphics('graphics', 'decoration', 'grass', 'grass.png')
+                        tile_surface = grass_tile_list[int(item)]
+                        sprite = StaticTile( (x, y), tile_size, tile_surface)
                         sprite_group.add(sprite)
+                        
+                    sprite_group.add(sprite)
             
             
         return sprite_group
@@ -148,11 +160,15 @@ class Level:
         #remove? tiles.update
         self.tiles.update(self.world_shift)
         self.terrain_sprites.draw(self.display_surface)
+        
+        #grass 
+        self.grass_sprites.update(self.world_shift)
+        self.grass_sprites.draw(self.display_surface)
 
         #self.tiles.draw(self.display_surface)
         #vid2
-        self.terrain_sprites.draw(self.display_surface)
         self.terrain_sprites.update(self.world_shift)
+        self.terrain_sprites.draw(self.display_surface)
         
 
 

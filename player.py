@@ -33,7 +33,6 @@ class Player(pygame.sprite.Sprite):
         self.on_right = False
         
     def import_character_assests(self):
-        print('imhere')
         my_path = path.join("graphics", "character")
         #character_path = '../graphics/character/'#changed
         self.animations = {'idle':[],

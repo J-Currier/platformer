@@ -16,6 +16,7 @@ tutorial @ https://www.youtube.com/watch?v=wJMDh9QGRgs *3:09:23
 1:05:45
 1:08:40 
 1 18 25
+1 25 03
 
 
 tutorial @ hhttps://www.youtube.com/watch?v=wJMDh9QGRgs *3:09:23
