@@ -1,7 +1,7 @@
 from turtle import speed
 import pygame
 from particles import ParticleEffect
-from tiles import Tile
+from tiles import Tile, StaticTile
 from settings import tile_size, screen_width
 from player import Player
 from particles import ParticleEffect
@@ -34,8 +34,8 @@ class Level:
                     
                     if type == 'terrain': 
                         terrain_tile_list = import_cut_graphics('graphics', 'terrain', 'terrain_tiles.png')
-                        #terrain_tile_list = import_cut_graphics('..\graphics\terrain\terrain_tiles.png')
-                        sprite = Tile( (x, y), tile_size)
+                        tile_surface = terrain_tile_list[int(item)]
+                        sprite = StaticTile( (x, y), tile_size, tile_surface)
                         sprite_group.add(sprite)
             
             

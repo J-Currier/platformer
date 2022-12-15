@@ -14,6 +14,6 @@ class Tile(pygame.sprite.Sprite):
         
 class StaticTile(Tile):
     def __init__(self, pos, size, surface):
-        super.__init__(pos, size)
+        super().__init__(pos, size)
         self.image = surface
         

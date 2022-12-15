@@ -32,7 +32,6 @@ def import_cut_graphics(*my_path):
     new_path = ''
     for x in my_path:
         new_path = os.path.join(new_path, x)   
-    #full_path = path.join(my_path)
     surface = pygame.image.load(new_path).convert_alpha() #LU
     tile_num_x = int(surface.get_size()[0]/tile_size)
     tile_num_y = int(surface.get_size()[1]/tile_size)
