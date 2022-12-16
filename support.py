@@ -18,7 +18,10 @@ def import_folder(path):
             #use convert alpha on png files
             surface_list.append(my_surface)
     return surface_list
-        
+ 
+
+ 
+       
 def import_csv_layout(myList):
     path = os.path.join(*myList)
     terrain_map = []

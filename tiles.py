@@ -3,6 +3,7 @@
 import pygame
 import os 
 from settings import tile_size
+from support import import_folder
 
 
 class Tile(pygame.sprite.Sprite):
@@ -26,4 +27,25 @@ class Crate(StaticTile):
         offset_y = pos[1] + tile_size
         self.rect = self.image.get_rect(bottomleft = (pos[0], offset_y))
         print('crate position error')
+
+class AnimatedTile(Tile):
+    def __init__(self, pos, size, *my_path):
+        super().__init__(pos, size)
+        print(my_path, type(my_path), 'myp')   
+        print('print', os.path.join(*my_path))
+        self.frames = import_folder(os.path.join(*my_path))
+        self.frame_index = 0
+        self.image = self.frames[self.frame_index]
         
+    def animate(self):
+        self.frame_index += 0.15
+        if self.frame_index >= len(self.frames):
+            self.frame_index = 0
+        self.image = self.frames[int(self.frame_index)]
+        
+    def update(self, x_shift):
+        self.animate()
+        self.rect.x += x_shift
+        
+        
+            

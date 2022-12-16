@@ -1,12 +1,13 @@
 from turtle import speed
 import pygame
 from particles import ParticleEffect
-from tiles import Tile, StaticTile, Crate
+from tiles import Tile, StaticTile, Crate, AnimatedTile
 from settings import tile_size, screen_width
 from player import Player
 from particles import ParticleEffect
 from support import import_csv_layout, import_cut_graphics
-#from os import path
+from os import path
+
 
 class Level:
     def __init__(self, level_data, surface):
@@ -31,6 +32,10 @@ class Level:
         crate_layout = import_csv_layout(level_data['crates'])
         self.crate_sprites = self.create_tile_group(crate_layout, 'crates')
         
+        #coins
+        coin_layout = import_csv_layout(level_data['coins'])
+        self.coin_sprites = self.create_tile_group(coin_layout, 'coins')
+
     def create_tile_group(self, layout, type):
         sprite_group = pygame.sprite.Group()
         
@@ -50,11 +55,16 @@ class Level:
                         grass_tile_list = import_cut_graphics('graphics', 'decoration', 'grass', 'grass.png')
                         tile_surface = grass_tile_list[int(item)]
                         sprite = StaticTile( (x, y), tile_size, tile_surface)
-                        sprite_group.add(sprite)
+                       
                         
                     if type == 'crates':
                         sprite = Crate((x, y), tile_size)
-                        sprite_group.add(sprite)
+                        
+                        
+                    if type == 'coins':
+                        print('im a coin')
+                        sprite = AnimatedTile((x, y), tile_size, 'graphics', 'coins', 'gold')
+                        
                         
                         
                     sprite_group.add(sprite)
@@ -182,6 +192,10 @@ class Level:
         #crate
         self.crate_sprites.update(self.world_shift)
         self.crate_sprites.draw(self.display_surface)
+        
+        #coins
+        self.coin_sprites.update(self.world_shift)
+        self.coin_sprites.draw(self.display_surface)
         
         
         
