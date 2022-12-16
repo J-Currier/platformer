@@ -63,7 +63,10 @@ class Level:
                         
                     if type == 'coins':
                         print('im a coin')
-                        sprite = Coin((x, y), tile_size, 'graphics', 'coins', 'gold')
+                        if item == '0':
+                            sprite = Coin((x, y), tile_size, 'graphics', 'coins', 'gold')
+                        if item == '1':
+                            sprite = Coin((x, y), tile_size, 'graphics', 'coins', 'silver')
                         
                         
                         
