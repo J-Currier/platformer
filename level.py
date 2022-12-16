@@ -1,7 +1,7 @@
 from turtle import speed
 import pygame
 from particles import ParticleEffect
-from tiles import Tile, StaticTile, Crate, AnimatedTile
+from tiles import Tile, StaticTile, Crate, Coin
 from settings import tile_size, screen_width
 from player import Player
 from particles import ParticleEffect
@@ -63,7 +63,7 @@ class Level:
                         
                     if type == 'coins':
                         print('im a coin')
-                        sprite = AnimatedTile((x, y), tile_size, 'graphics', 'coins', 'gold')
+                        sprite = Coin((x, y), tile_size, 'graphics', 'coins', 'gold')
                         
                         
                         
