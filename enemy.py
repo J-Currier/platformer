@@ -1,10 +1,11 @@
 import pygame
 from tiles import AnimatedTile
 from random import randint
+from os import path
 
 class Enemy(AnimatedTile):
     def __init__(self, pos, size, *my_path):
-        super().__init__(pos, size, ('graphics', 'enemy', 'run'))
+        super().__init__(pos, size, *my_path)
         self.rect.y += size - self.image.get_size()[1]
         self.speed = randint(3, 5)
         

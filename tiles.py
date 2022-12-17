@@ -29,10 +29,8 @@ class Crate(StaticTile):
         print('crate position error')
 
 class AnimatedTile(Tile):
-    def __init__(self, pos, size, *my_path):
+    def __init__(self, pos, size, offset, *my_path):
         super().__init__(pos, size)
-        print(my_path, type(my_path), 'myp')   
-        #print('print', os.path.join(*my_path))
         self.frames = import_folder(os.path.join(*my_path))
         self.frame_index = 0
         self.image = self.frames[self.frame_index]
@@ -50,6 +48,8 @@ class AnimatedTile(Tile):
 class Coin(AnimatedTile):
     def __init__(self, pos, size, *my_path):
         super().__init__(pos, size, *my_path)
+        #sprite = Coin((x, y), tile_size, 0, 'graphics', 'coins', 'silver')
+
         center_x = pos[0] + int(tile_size / 2)
         center_y = pos[1] + int(tile_size / 2)
         self.rect = self.image.get_rect(center = (center_x, center_y))

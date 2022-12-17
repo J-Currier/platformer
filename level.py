@@ -82,21 +82,22 @@ class Level:
                     if type == 'coins':
                         print('im a coin')
                         if item == '0':
-                            sprite = Coin((x, y), tile_size, 'graphics', 'coins', 'gold')
+                            sprite = Coin((x, y), tile_size, 2, 'graphics', 'coins', 'gold')
                         if item == '1':
-                            sprite = Coin((x, y), tile_size, 'graphics', 'coins', 'silver')
+                            sprite = Coin((x, y), tile_size, 2, 'graphics', 'coins', 'silver')
                         
                     if type == 'fg_palms':
                         if item == '0':
                             sprite = Palm((x, y), tile_size, 38, 'graphics', 'terrain', 'palm_small')
                         if item == '1':
+                            print('largepalm ln93 level')
                             sprite = Palm((x, y), tile_size, 64, 'graphics', 'terrain', 'palm_large')
                             
                     if type == 'bg_palms':
                         sprite = Palm((x, y), tile_size, 64, 'graphics', 'terrain', 'palm_bg')
                         
                     if type == 'enemies':
-                        sprite = Enemy((x, y), tile_size)
+                        sprite = Enemy((x, y), tile_size, 1, 'graphics', 'enemy', 'run')
                         
                     if type == 'constraints':
                         sprite = Tile((x, y), tile_size)
@@ -107,7 +108,7 @@ class Level:
         return sprite_group
     
     def enemy_collision_reverse(self):
-        for enemy in self.enemy_sprites():
+        for enemy in self.enemy_sprites.sprites():
             if pygame.sprite.spritecollide(enemy, self.constraint_sprites, False):
                 enemy.reverse()
         
