@@ -53,6 +53,11 @@ class Coin(AnimatedTile):
         center_x = pos[0] + int(tile_size / 2)
         center_y = pos[1] + int(tile_size / 2)
         self.rect = self.image.get_rect(center = (center_x, center_y))
-        
+    
+class Palm(AnimatedTile):
+    def __init__(self, pos, size, offset, *my_path):
+        super().__init__(pos, size, offset, *my_path)
+        offset_y = pos[1] - offset
+        self.rect.topleft = (pos[0], offset_y #Change can change offsets in other classes to look like this? this just moves rect but keeps the top left as origin point
         
             

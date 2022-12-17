@@ -1,7 +1,7 @@
 from turtle import speed
 import pygame
 from particles import ParticleEffect
-from tiles import Tile, StaticTile, Crate, Coin
+from tiles import Tile, StaticTile, Crate, Coin, Palm
 from settings import tile_size, screen_width
 from player import Player
 from particles import ParticleEffect
@@ -35,6 +35,10 @@ class Level:
         #coins
         coin_layout = import_csv_layout(level_data['coins'])
         self.coin_sprites = self.create_tile_group(coin_layout, 'coins')
+        
+        #palmstrees foreground
+        fg_palm_layout = import_csv_layout(level_data['fg_palms'])
+        self.fg_palm_sprites = self.create_tile_group(fg_palm_layout, 'fg_palms')
 
     def create_tile_group(self, layout, type):
         sprite_group = pygame.sprite.Group()
@@ -68,7 +72,12 @@ class Level:
                         if item == '1':
                             sprite = Coin((x, y), tile_size, 'graphics', 'coins', 'silver')
                         
-                        
+                    if type == 'fg_palms':
+                        if item == '0':
+                            sprite = Palm((x, y), tile_size, 38, 'graphics', 'terrain', 'palm_small')
+                        if item == '1':
+                            sprite = Palm((x, y), tile_size, 64, 'graphics', 'terrain', 'palm_large')
+                            
                         
                     sprite_group.add(sprite)
             
@@ -199,6 +208,10 @@ class Level:
         #coins
         self.coin_sprites.update(self.world_shift)
         self.coin_sprites.draw(self.display_surface)
+        
+        #palms foreground
+        self.fg_palm_sprites.update(self.world_shift)
+        self.fg_palm_sprites.draw(self.display_surface)
         
         
         
