@@ -7,6 +7,7 @@ from player import Player
 from particles import ParticleEffect
 from support import import_csv_layout, import_cut_graphics
 from os import path
+from enemy import Enemy
 
 
 class Level:
@@ -43,6 +44,15 @@ class Level:
         #palmtrees foreground
         bg_palm_layout = import_csv_layout(level_data['bg_palms'])
         self.bg_palm_sprites = self.create_tile_group(bg_palm_layout, 'bg_palms')
+        
+        #enemies
+        enemy_layout = import_csv_layout(level_data['enemies'])
+        self.enemy_sprites = self.create_tile_group(enemy_layout, 'enemies')
+        
+        #enemy constraint
+        constraint_layout = import_csv_layout(level_data['constraints'])
+        self.constraint_sprites = self.create_tile_group(constraint_layout, 'constraints')
+
 
     def create_tile_group(self, layout, type):
         sprite_group = pygame.sprite.Group()
@@ -85,10 +95,21 @@ class Level:
                     if type == 'bg_palms':
                         sprite = Palm((x, y), tile_size, 64, 'graphics', 'terrain', 'palm_bg')
                         
+                    if type == 'enemies':
+                        sprite = Enemy((x, y), tile_size)
+                        
+                    if type == 'constraints':
+                        sprite = Tile((x, y), tile_size)
+                        
                     sprite_group.add(sprite)
             
             
         return sprite_group
+    
+    def enemy_collision_reverse(self):
+        for enemy in self.enemy_sprites():
+            if pygame.sprite.spritecollide(enemy, self.constraint_sprites, False):
+                enemy.reverse()
         
    
     def create_jump_particles(self, pos):
@@ -202,6 +223,17 @@ class Level:
         self.tiles.update(self.world_shift)
         self.terrain_sprites.draw(self.display_surface)
         
+        #enemies
+        self.enemy_sprites.update(self.world_shift)
+        self.constraint_sprites.update(self.world_shift)
+        self.enemy_collision_reverse()
+        self.enemy_sprites.draw(self.display_surface)
+
+
+        #crate
+        self.crate_sprites.update(self.world_shift)
+        self.crate_sprites.draw(self.display_surface)
+
         #grass 
         self.grass_sprites.update(self.world_shift)
         self.grass_sprites.draw(self.display_surface)
@@ -211,9 +243,6 @@ class Level:
         self.terrain_sprites.update(self.world_shift)
         self.terrain_sprites.draw(self.display_surface)
         
-        #crate
-        self.crate_sprites.update(self.world_shift)
-        self.crate_sprites.draw(self.display_surface)
         
         #coins
         self.coin_sprites.update(self.world_shift)

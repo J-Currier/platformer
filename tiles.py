@@ -32,7 +32,7 @@ class AnimatedTile(Tile):
     def __init__(self, pos, size, *my_path):
         super().__init__(pos, size)
         print(my_path, type(my_path), 'myp')   
-        print('print', os.path.join(*my_path))
+        #print('print', os.path.join(*my_path))
         self.frames = import_folder(os.path.join(*my_path))
         self.frame_index = 0
         self.image = self.frames[self.frame_index]
@@ -58,6 +58,6 @@ class Palm(AnimatedTile):
     def __init__(self, pos, size, offset, *my_path):
         super().__init__(pos, size, offset, *my_path)
         offset_y = pos[1] - offset
-        self.rect.topleft = (pos[0], offset_y #Change can change offsets in other classes to look like this? this just moves rect but keeps the top left as origin point
+        self.rect.topleft = (pos[0], offset_y) #Change can change offsets in other classes to look like this? this just moves rect but keeps the top left as origin point
         
             
