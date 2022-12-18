@@ -8,6 +8,7 @@ from particles import ParticleEffect
 from support import import_csv_layout, import_cut_graphics
 from os import path
 from enemy import Enemy
+from decoration import Sky
 
 
 class Level:
@@ -58,6 +59,9 @@ class Level:
         #enemy constraint
         constraint_layout = import_csv_layout(level_data['constraints'])
         self.constraint_sprites = self.create_tile_group(constraint_layout, 'constraints')
+        
+        #sky
+        self.sky = Sky(8)
 
 
     def create_tile_group(self, layout, type):
@@ -232,7 +236,11 @@ class Level:
             player.on_ceiling = False
                        
     def run(self):
+        
+        #sky
+        self.sky.draw(self.display_surface)
         #dust particles
+        
         self.dust_sprite.update(self.world_shift)
         self.dust_sprite.draw(self.display_surface)
         
@@ -277,6 +285,7 @@ class Level:
         #goal sprite
         self.goal.update(self.world_shift)
         self.goal.draw(self.display_surface)
+        
         
         
         
