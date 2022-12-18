@@ -21,6 +21,12 @@ class Level:
         self.dust_sprite = pygame.sprite.GroupSingle()
         self.player_on_ground = False
 
+        #player
+        player_layout= import_csv_layout(level_data['player'])
+        self.player = pygame.sprite.GroupSingle()
+        self.goal = pygame.sprite.GroupSingle()
+        self.player_setup(player_layout)
+        
         #terrain layout level arcitecture lu 
         terrain_layout= import_csv_layout(level_data['terrain'])
         self.terrain_sprites = self.create_tile_group(terrain_layout, 'terrain')
@@ -107,6 +113,21 @@ class Level:
             
         return sprite_group
     
+    def player_setup(self, layout):
+        for row_index, row in enumerate(layout):
+            for item_index, item in enumerate(row):
+                x = item_index * tile_size
+                y = row_index * tile_size
+
+                if item == '0':
+                    print('player goes here')
+                if item == '1':
+                    hat_surface = pygame.image.load(path.join('graphics', 'character', 'hat.png')).convert_alpha()
+                    sprite = StaticTile((x, y), tile_size, hat_surface)
+                    self.goal.add(sprite)
+
+
+
     def enemy_collision_reverse(self):
         for enemy in self.enemy_sprites.sprites():
             if pygame.sprite.spritecollide(enemy, self.constraint_sprites, False):
@@ -252,6 +273,11 @@ class Level:
         #palms foreground
         self.fg_palm_sprites.update(self.world_shift)
         self.fg_palm_sprites.draw(self.display_surface)
+        
+        #goal sprite
+        self.goal.update(self.world_shift)
+        self.goal.draw(self.display_surface)
+        
         
         
 
