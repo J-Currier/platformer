@@ -5,8 +5,8 @@ from settings import vertical_tile_height, tile_size, screen_width
 class Sky:
     def __init__(self, horizon):
         self.top = pygame.image.load(path.join('graphics', 'decoration', 'sky', 'sky_top.png')).convert()
-        self.bottom = pygame.image.load(path.join('graphics', 'decoration', 'sky', 'sky_bottom'))
-        self.middle = pygame.image.load(path.join('graphics', 'decoration', 'sky', 'sky_bottom'))
+        self.bottom = pygame.image.load(path.join('graphics', 'decoration', 'sky', 'sky_bottom.png'))
+        self.middle = pygame.image.load(path.join('graphics', 'decoration', 'sky', 'sky_middle.png'))
         self.horizon = horizon
         
         #horizontal stretch
@@ -24,4 +24,7 @@ class Sky:
             else:
                 surface.blit(self.bottom, (0, y))
     
-    
+class Water: 
+    def __init__(self, top, level_width):
+        
+        pass   

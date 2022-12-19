@@ -21,6 +21,7 @@ tutorial @ https://www.youtube.com/watch?v=wJMDh9QGRgs *3:09:23
 1 45 02
 1 56 31 R
 2 19 38 f error to be fixed 
+2 34 49 su
 
 
 tutorial @ hhttps://www.youtube.com/watch?v=wJMDh9QGRgs *3:09:23
@@ -45,6 +46,7 @@ bug to fix-> ~1:45 if up against a wall when jumping, when you land you teleport
 1:59:04
 2:03:24
 2:11:38
+
 
 
 1:08:57******

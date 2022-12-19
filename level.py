@@ -2,13 +2,13 @@ from turtle import speed
 import pygame
 from particles import ParticleEffect
 from tiles import Tile, StaticTile, Crate, Coin, Palm
-from settings import tile_size, screen_width
+from settings import tile_size, screen_width, screen_height
 from player import Player
 from particles import ParticleEffect
 from support import import_csv_layout, import_cut_graphics
 from os import path
 from enemy import Enemy
-from decoration import Sky
+from decoration import Sky, Water
 
 
 class Level:
@@ -62,6 +62,9 @@ class Level:
         
         #sky
         self.sky = Sky(8)
+        level_width = len(terrain_layout[0] * tile_size)
+        self.water = Water(100, 100)
+        self.water = Water((screen_height - 40), level_width )
 
 
     def create_tile_group(self, layout, type):
