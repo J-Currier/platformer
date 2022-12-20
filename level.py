@@ -64,7 +64,7 @@ class Level:
         self.sky = Sky(8)
         level_width = len(terrain_layout[0] * tile_size)
         self.water = Water(100, 100)
-        self.water = Water((screen_height - 40), level_width )
+        self.water = Water((screen_height - 20), level_width )
 
 
     def create_tile_group(self, layout, type):
@@ -242,6 +242,7 @@ class Level:
         
         #sky
         self.sky.draw(self.display_surface)
+        
         #dust particles
         
         self.dust_sprite.update(self.world_shift)
@@ -289,7 +290,9 @@ class Level:
         self.goal.update(self.world_shift)
         self.goal.draw(self.display_surface)
         
-        
+        #water
+        self.water.draw(self.display_surface, self.world_shift)
+
         
         
 
