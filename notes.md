@@ -53,3 +53,7 @@ bug to fix-> ~1:45 if up against a wall when jumping, when you land you teleport
 1:08:57******
 
 *44 minures level_0 dat
+
+
+to do 
+add in horizon variable for init method sky and clouds (and maybe water?) in level file

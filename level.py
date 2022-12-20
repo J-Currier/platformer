@@ -8,7 +8,7 @@ from particles import ParticleEffect
 from support import import_csv_layout, import_cut_graphics
 from os import path
 from enemy import Enemy
-from decoration import Sky, Water
+from decoration import Sky, Water, Cloud
 
 
 class Level:
@@ -63,8 +63,13 @@ class Level:
         #sky
         self.sky = Sky(8)
         level_width = len(terrain_layout[0] * tile_size)
-        self.water = Water(100, 100)
-        self.water = Water((screen_height - 20), level_width )
+        self.clouds = Cloud( 400, level_width, 22)
+        
+        #water
+        self.water = Water((screen_height - 20), level_width)
+        
+        
+
 
 
     def create_tile_group(self, layout, type):
@@ -242,6 +247,7 @@ class Level:
         
         #sky
         self.sky.draw(self.display_surface)
+        self.clouds.draw(self.display_surface, self.world_shift)
         
         #dust particles
         
