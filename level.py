@@ -17,7 +17,7 @@ class Level:
         self.display_surface = surface
         self.setup_level(level_data)
         self.world_shift = 0
-        self.current_x = 0
+        self.current_x = None
         #dust
         self.dust_sprite = pygame.sprite.GroupSingle()
         self.player_on_ground = False
@@ -132,7 +132,8 @@ class Level:
                 y = row_index * tile_size
 
                 if item == '0':
-                    print('player goes here')
+                    sprite = Player((x, y), self.display_surface, self.create_jump_particles)
+                    self.player.add(sprite)
                 if item == '1':
                     hat_surface = pygame.image.load(path.join('graphics', 'character', 'hat.png')).convert_alpha()
                     sprite = StaticTile((x, y), tile_size, hat_surface)
@@ -205,8 +206,9 @@ class Level:
     def horizontal_movement_collision(self):
         player = self.player.sprite
         player.rect.x += player.direction.x * player.speed
+        collidable_sprites = self.terrain_sprites.sprites() + self.crate_sprites.sprites() + self.fg_palm_sprites.sprites()
         
-        for sprite in self.tiles.sprites():
+        for sprite in collidable_sprites:
             if sprite.rect.colliderect(player.rect):
                 if player.direction.x < 0:
                     player.rect.left = sprite.rect.right
@@ -225,8 +227,9 @@ class Level:
     def vertical_movement_collision(self):
         player = self.player.sprite
         player.apply_gravity()
+        collidable_sprites = self.terrain_sprites.sprites() + self.crate_sprites.sprites() + self.fg_palm_sprites.sprites()
         
-        for sprite in self.tiles.sprites():
+        for sprite in collidable_sprites:
             if sprite.rect.colliderect(player.rect):
                 if player.direction.y < 0 :
                     player.rect.top = sprite.rect.bottom
@@ -249,10 +252,6 @@ class Level:
         self.sky.draw(self.display_surface)
         self.clouds.draw(self.display_surface, self.world_shift)
         
-        #dust particles
-        
-        self.dust_sprite.update(self.world_shift)
-        self.dust_sprite.draw(self.display_surface)
         
         #palms background
         self.bg_palm_sprites.update(self.world_shift)
@@ -296,8 +295,10 @@ class Level:
         self.goal.update(self.world_shift)
         self.goal.draw(self.display_surface)
         
-        #water
-        self.water.draw(self.display_surface, self.world_shift)
+       
+        #dust particles
+        self.dust_sprite.update(self.world_shift)
+        self.dust_sprite.draw(self.display_surface)
 
         
         
@@ -305,13 +306,15 @@ class Level:
 
         #player sprite
         self.player.update()
+        self.player.draw(self.display_surface)
         self.scroll_x()
         self.horizontal_movement_collision()
         self.get_player_on_ground() #checks if player on ground before vert collision
         self.vertical_movement_collision()
         self.create_landing_dust()
         
-       
+        #water
+        self.water.draw(self.display_surface, self.world_shift)
         
         self.player.draw(self.display_surface)
         
