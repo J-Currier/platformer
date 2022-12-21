@@ -2,6 +2,11 @@
 
 LU
 
+
+THIRD VIDEO
+https://www.youtube.com/watch?v=IUe2pdTWroc&t=0s
+6:52
+
 pygame.math.Vector2
 
 *set up file structure 41:40 (gamedata)

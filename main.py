@@ -2,12 +2,12 @@ import pygame, sys
 from settings import *
 from tiles import Tile
 from level import Level
-from gamedata import level_0
+from gamedata import levels
 #pygame set up
 pygame.init()
 screen = pygame.display.set_mode((screen_width, screen_height))
 clock = pygame.time.Clock()
-level = Level(level_0, screen)
+level = Level(levels[0], screen)
 
 while True:
     for event in pygame.event.get():
