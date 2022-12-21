@@ -131,10 +131,11 @@ class Level:
                 x = item_index * tile_size
                 y = row_index * tile_size
 
-                if item == '0':
+                if item == '1':
                     sprite = Player((x, y), self.display_surface, self.create_jump_particles)
                     self.player.add(sprite)
-                if item == '1':
+                    print('player', self.player)
+                if item == '2':
                     hat_surface = pygame.image.load(path.join('graphics', 'character', 'hat.png')).convert_alpha()
                     sprite = StaticTile((x, y), tile_size, hat_surface)
                     self.goal.add(sprite)
