@@ -6,6 +6,7 @@ LU
 THIRD VIDEO
 https://www.youtube.com/watch?v=IUe2pdTWroc&t=0s
 6:52
+13 55 w
 
 pygame.math.Vector2
 
