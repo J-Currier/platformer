@@ -7,6 +7,7 @@ THIRD VIDEO
 https://www.youtube.com/watch?v=IUe2pdTWroc&t=0s
 6:52
 13 55 w
+18:56 r
 
 pygame.math.Vector2
 
