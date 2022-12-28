@@ -26,6 +26,7 @@ class Overworld:
         #sprites
         self.setup_nodes()
         
+        
     def setup_nodes(self):
         self.nodes = pygame.sprite.Group()
         for index, node_data in enumerate(levels.values()):
@@ -36,13 +37,20 @@ class Overworld:
             self.nodes.add(node_sprite)
             
     def draw_paths(self):
+        #make a list of points up to open level (below max level)
+        points = []
+        for index, node_data in enumerate(levels.values()):
+            if index <= self.max_level:
+                points.append(node_data['node_pos'])
+                
+                
+        pygame.draw.lines(self.display_surface, 'purple', False,  points, 6)
         
-        pygame.draw.line(self.display_surface, 'purple', False,  points, 6
  
             
     def run(self):
+        self.draw_paths()
         self.nodes.draw(self.display_surface)
         
-        pass
         
         
