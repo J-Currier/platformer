@@ -9,7 +9,8 @@ https://www.youtube.com/watch?v=IUe2pdTWroc&t=0s
 13 55 w
 18:56 r
 23 23 f
-
+list comprehensions LU 27:40
+28 10
 pygame.math.Vector2
 
 *set up file structure 41:40 (gamedata)

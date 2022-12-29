@@ -13,8 +13,11 @@ class Node(pygame.sprite.Sprite):
             self.image.fill('dark blue')
         self.rect = self.image.get_rect(center = pos)
             
-        
-        
+class Icon(pygame.sprite.Sprite):
+     def __init__(self, pos):
+        self.image = pygame.Surface((20, 20))
+        self.image.fill('dark green')
+        self.rect = self.image.get_rect(center = pos)
         
 class Overworld:
     def __init__(self, start_level, max_level, surface):
@@ -25,6 +28,7 @@ class Overworld:
         
         #sprites
         self.setup_nodes()
+        self.setup_icon()
         
         
     def setup_nodes(self):
