@@ -32,7 +32,6 @@ class Overworld:
         self.setup_nodes()
         self.setup_icon()
         
-        
     def setup_nodes(self):
         self.nodes = pygame.sprite.Group()
         for index, node_data in enumerate(levels.values()):
@@ -56,9 +55,21 @@ class Overworld:
         self.icon = pygame.sprite.GroupSingle()
         icon_sprite = Icon(self.nodes.sprites()[self.current_level].rect.center)
         self.icon.add(icon_sprite)
+ 
+    def input(self):
+        keys = pygame.key.get_pressed()
         
-            
+        if keys[pygame.K_RIGHT] and self.current_level < self.max_level:
+            self.current_level += 1
+        elif keys[pygame.K_LEFT] and self.current_level > 0:
+            self.current_level -= 1
+    
+    def update_icon_pos(self):
+        self.icon.sprite.rect.center = self.nodes.sprites()[self.current_level].rect.center
+
     def run(self):
+        self.input()
+        self.update_icon_pos()
         self.draw_paths()
         self.nodes.draw(self.display_surface)
         self.icon.draw(self.display_surface)
