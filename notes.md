@@ -12,6 +12,7 @@ https://www.youtube.com/watch?v=IUe2pdTWroc&t=0s
 list comprehensions LU 27:40
 28 10
 pygame.math.Vector2
+29 40
 
 *set up file structure 41:40 (gamedata)
 
