@@ -75,18 +75,22 @@ class Overworld:
         
         if not self.moving:
             if keys[pygame.K_RIGHT] and self.current_level < self.max_level:
-                self.move_direction = self.get_movement_data()
+                self.move_direction = self.get_movement_data('next')
                 self.current_level += 1
                 self.moving = True
             elif keys[pygame.K_LEFT] and self.current_level > 0:
+                self.move_direction = self.get_movement_data('last')
                 self.current_level -= 1
                 self.moving = True
 
             
-    def get_movement_data(self):
+    def get_movement_data(self, target):
         #calculates the degree of the path between nodes
         start = pygame.math.Vector2(self.nodes.sprites()[self.current_level].rect.center)
-        end = pygame.math.Vector2(self.nodes.sprites()[self.current_level + 1].rect.center)
+        if target == 'next':
+            end = pygame.math.Vector2(self.nodes.sprites()[self.current_level + 1].rect.center)
+        else:
+            end = pygame.math.Vector2(self.nodes.sprites()[self.current_level - 1].rect.center)
         
         return (end - start).normalize()
         
