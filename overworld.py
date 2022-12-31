@@ -3,6 +3,7 @@ from gamedata import levels
 
 
 class Node(pygame.sprite.Sprite):
+    #creates nodes for each level
     def __init__(self, pos, status):
         super().__init__()
 
@@ -22,7 +23,7 @@ class Icon(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center = pos)
         
     def update(self):
-        #adjusts rect pos to account for int conversion
+        #adjusts rect of player icon position to account for int conversion when placing the level rectangle/icon on the screen
         self.rect.center = self.pos
         
 class Overworld:
@@ -43,6 +44,7 @@ class Overworld:
         self.setup_icon()
         
     def setup_nodes(self):
+        #creates level nodes and either locks or opens them based on current level completed
         self.nodes = pygame.sprite.Group()
         for index, node_data in enumerate(levels.values()):
             if index <= self.max_level:
@@ -62,11 +64,13 @@ class Overworld:
         pygame.draw.lines(self.display_surface, 'purple', False,  points, 6)
         
     def setup_icon(self):
+        #creates the player sprite
         self.icon = pygame.sprite.GroupSingle()
         icon_sprite = Icon(self.nodes.sprites()[self.current_level].rect.center)
         self.icon.add(icon_sprite)
  
     def input(self):
+        #detects if key is being pressed and adjusts the current level accordingly
         keys = pygame.key.get_pressed()
         
         if not self.moving:
@@ -80,6 +84,7 @@ class Overworld:
 
             
     def get_movement_data(self):
+        #calculates the degree of the path between nodes
         start = pygame.math.Vector2(self.nodes.sprites()[self.current_level].rect.center)
         end = pygame.math.Vector2(self.nodes.sprites()[self.current_level + 1].rect.center)
         
@@ -87,6 +92,7 @@ class Overworld:
         
     
     def update_icon_pos(self):
+        #moves icon from one level node to another after player presses key
         self.icon.sprite.pos += self.move_direction * self.speed
     
     def run(self):

@@ -1,4 +1,4 @@
-
+#data for each game level
 level_0 = {
     'node_pos': (110, 400),
     'unlock': 1,
