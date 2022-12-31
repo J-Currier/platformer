@@ -9,7 +9,7 @@ class Node(pygame.sprite.Sprite):
 
         self.image = pygame.Surface((100, 80)) 
         if status == 'available':
-            self.image.fill('purple')
+            self.image.fill('darkviolet')
         else:
             self.image.fill('dark blue')
         self.rect = self.image.get_rect(center = pos)
@@ -24,7 +24,7 @@ class Icon(pygame.sprite.Sprite):
         super().__init__()
         self.pos = pos
         self.image = pygame.Surface((20, 20))
-        self.image.fill('dark green')
+        self.image.fill('cyan')
         self.rect = self.image.get_rect(center = pos)
         
     def update(self):

@@ -9,13 +9,17 @@ from support import import_csv_layout, import_cut_graphics
 from os import path
 from enemy import Enemy
 from decoration import Sky, Water, Cloud
+from gamedata import levels
+
 
 
 class Level:
-    def __init__(self, level_data, surface):
+    def __init__(self, current_level, surface):
         #level setup
+        self.current_level = current_level
+        self.level_data = levels[self.current_level]
         self.display_surface = surface
-        self.setup_level(level_data)
+        self.setup_level(self.level_data)
         self.world_shift = 0
         self.current_x = None
         #dust
@@ -23,41 +27,41 @@ class Level:
         self.player_on_ground = False
 
         #player
-        player_layout= import_csv_layout(level_data['player'])
+        player_layout= import_csv_layout(self.['player'])
         self.player = pygame.sprite.GroupSingle()
         self.goal = pygame.sprite.GroupSingle()
         self.player_setup(player_layout)
         
         #terrain layout level arcitecture lu 
-        terrain_layout= import_csv_layout(level_data['terrain'])
+        terrain_layout= import_csv_layout(self.level_data['terrain'])
         self.terrain_sprites = self.create_tile_group(terrain_layout, 'terrain')
         
         #grass set up
-        grass_layout = import_csv_layout(level_data['grass'])
+        grass_layout = import_csv_layout((self.level_data['grass'])
         self.grass_sprites = self.create_tile_group(grass_layout, 'grass')
         
         #crates set up
-        crate_layout = import_csv_layout(level_data['crates'])
+        crate_layout = import_csv_layout((self.level_data['crates'])
         self.crate_sprites = self.create_tile_group(crate_layout, 'crates')
         
         #coins
-        coin_layout = import_csv_layout(level_data['coins'])
+        coin_layout = import_csv_layout((self.level_data['coins'])
         self.coin_sprites = self.create_tile_group(coin_layout, 'coins')
         
         #palmtrees foreground
-        fg_palm_layout = import_csv_layout(level_data['fg_palms'])
+        fg_palm_layout = import_csv_layout((self.level_data['fg_palms'])
         self.fg_palm_sprites = self.create_tile_group(fg_palm_layout, 'fg_palms')
         
         #palmtrees foreground
-        bg_palm_layout = import_csv_layout(level_data['bg_palms'])
+        bg_palm_layout = import_csv_layout((self.level_data['bg_palms'])
         self.bg_palm_sprites = self.create_tile_group(bg_palm_layout, 'bg_palms')
         
         #enemies
-        enemy_layout = import_csv_layout(level_data['enemies'])
+        enemy_layout = import_csv_layout((self.level_data['enemies'])
         self.enemy_sprites = self.create_tile_group(enemy_layout, 'enemies')
         
         #enemy constraint
-        constraint_layout = import_csv_layout(level_data['constraints'])
+        constraint_layout = import_csv_layout((self.level_data['constraints'])
         self.constraint_sprites = self.create_tile_group(constraint_layout, 'constraints')
         
         #sky
