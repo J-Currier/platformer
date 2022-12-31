@@ -22,6 +22,7 @@ class Level:
         self.setup_level(self.level_data)
         self.world_shift = 0
         self.current_x = None
+        self.new_max_level = self.level_data['unlock']
         #dust
         self.dust_sprite = pygame.sprite.GroupSingle()
         self.player_on_ground = False

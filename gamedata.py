@@ -10,7 +10,8 @@ level_0 = {
     'enemies': ['2 - Level', 'levels', '0', 'level_0._enemies.csv'],
     'constraints': ['2 - Level', 'levels', '0', 'level_0._constraints.csv'],
     'player': ['2 - Level', 'levels', '0', 'level_0._player.csv'],
-    'grass': ['2 - Level', 'levels', '0', 'level_0._grass.csv']
+    'grass': ['2 - Level', 'levels', '0', 'level_0._grass.csv'],
+    'content': 'This is Level 0'
 }
 
 level_1 = {
@@ -24,7 +25,8 @@ level_1 = {
     'enemies': ['2 - Level', 'levels', '0', 'level_0._enemies.csv'],
     'constraints': ['2 - Level', 'levels', '0', 'level_0._constraints.csv'],
     'player': ['2 - Level', 'levels', '0', 'level_0._player.csv'],
-    'grass': ['2 - Level', 'levels', '0', 'level_0._grass.csv']
+    'grass': ['2 - Level', 'levels', '0', 'level_0._grass.csv'],
+    'content': 'This is Level 1'
 }
 
 level_2 = {
@@ -38,7 +40,9 @@ level_2 = {
     'enemies': ['2 - Level', 'levels', '0', 'level_0._enemies.csv'],
     'constraints': ['2 - Level', 'levels', '0', 'level_0._constraints.csv'],
     'player': ['2 - Level', 'levels', '0', 'level_0._player.csv'],
-    'grass': ['2 - Level', 'levels', '0', 'level_0._grass.csv']
+    'grass': ['2 - Level', 'levels', '0', 'level_0._grass.csv'],
+    
+    'content': 'This is Level 2'
 }
 
 level_3 = {
@@ -52,7 +56,8 @@ level_3 = {
     'enemies': ['2 - Level', 'levels', '0', 'level_0._enemies.csv'],
     'constraints': ['2 - Level', 'levels', '0', 'level_0._constraints.csv'],
     'player': ['2 - Level', 'levels', '0', 'level_0._player.csv'],
-    'grass': ['2 - Level', 'levels', '0', 'level_0._grass.csv']
+    'grass': ['2 - Level', 'levels', '0', 'level_0._grass.csv'],
+    'content': 'This is Level 3'
 }
 
 level_4 = {
@@ -66,7 +71,8 @@ level_4 = {
     'enemies': ['2 - Level', 'levels', '0', 'level_0._enemies.csv'],
     'constraints': ['2 - Level', 'levels', '0', 'level_0._constraints.csv'],
     'player': ['2 - Level', 'levels', '0', 'level_0._player.csv'],
-    'grass': ['2 - Level', 'levels', '0', 'level_0._grass.csv']
+    'grass': ['2 - Level', 'levels', '0', 'level_0._grass.csv'],
+    'content': 'This is Level 4'
 }
 
 level_5 = {
@@ -80,7 +86,8 @@ level_5 = {
     'enemies': ['2 - Level', 'levels', '0', 'level_0._enemies.csv'],
     'constraints': ['2 - Level', 'levels', '0', 'level_0._constraints.csv'],
     'player': ['2 - Level', 'levels', '0', 'level_0._player.csv'],
-    'grass': ['2 - Level', 'levels', '0', 'level_0._grass.csv']
+    'grass': ['2 - Level', 'levels', '0', 'level_0._grass.csv'],
+    'content': 'This is Level 0'
 }
 
 levels = {
