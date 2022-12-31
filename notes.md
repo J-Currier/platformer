@@ -16,6 +16,7 @@ pygame.math.Vector2
 39 04
 lu normailze vector (vector2) 43 45
 52 22
+54 35
 
 *set up file structure 41:40 (gamedata)
 

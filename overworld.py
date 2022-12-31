@@ -4,7 +4,7 @@ from gamedata import levels
 
 class Node(pygame.sprite.Sprite):
     #creates nodes for each level
-    def __init__(self, pos, status):
+    def __init__(self, pos, status, icon_speed):
         super().__init__()
 
         self.image = pygame.Surface((100, 80)) 
@@ -13,6 +13,11 @@ class Node(pygame.sprite.Sprite):
         else:
             self.image.fill('dark blue')
         self.rect = self.image.get_rect(center = pos)
+        #target rect needs to be h and w = to speed so that icon doesn't over shoot without triggering a collision
+        self.detection_zone = pygame.Rect((self.rect.centerx - (icon_speed/2)), (self.rect.centery - (icon_speed/2)), icon_speed, icon_speed)
+            
+        
+
             
 class Icon(pygame.sprite.Sprite):
     def __init__(self, pos):
@@ -48,9 +53,9 @@ class Overworld:
         self.nodes = pygame.sprite.Group()
         for index, node_data in enumerate(levels.values()):
             if index <= self.max_level:
-                node_sprite = Node(node_data['node_pos'], 'available')           
+                node_sprite = Node(node_data['node_pos'], 'available', self.speed)           
             else:
-                node_sprite = Node(node_data['node_pos'], 'locked')
+                node_sprite = Node(node_data['node_pos'], 'locked', self.speed)
             self.nodes.add(node_sprite)
             
     def draw_paths(self):
@@ -97,7 +102,14 @@ class Overworld:
     
     def update_icon_pos(self):
         #moves icon from one level node to another after player presses key
-        self.icon.sprite.pos += self.move_direction * self.speed
+        if self.moving and self.move_direction:
+            self.icon.sprite.pos += self.move_direction * self.speed
+            target_node = self.nodes.sprites()[self.current_level]
+            if target_node.detection_zone.collidepoint(self.icon.sprite.pos):
+                self.moving = False
+                self.move_direction = pygame.math.Vector2(0, 0)
+
+            
     
     def run(self):
         self.input()
