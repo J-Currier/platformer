@@ -13,6 +13,8 @@ list comprehensions LU 27:40
 28 10
 pygame.math.Vector2
 29 40
+39 04
+lu normailze vector (vector2) 43 45
 
 *set up file structure 41:40 (gamedata)
 
