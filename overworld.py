@@ -65,9 +65,8 @@ class Overworld:
         for index, node_data in enumerate(levels.values()):
             if index <= self.max_level:
                 points.append(node_data['node_pos'])
-                
-                
-        pygame.draw.lines(self.display_surface, 'purple', False,  points, 6)
+        if len(points) > 1:        
+            pygame.draw.lines(self.display_surface, 'purple', False,  points, 6)
         
     def setup_icon(self):
         #creates the player sprite
