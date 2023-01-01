@@ -8,13 +8,21 @@ from overworld import Overworld
 class Game:
     def __init__(self):
         self.max_level = 3
-        self.overworld = Overworld(1, self.max_level, screen, self.create_level)
+        self.current_level = 0
+        self.overworld = Overworld(0, self.max_level, screen, self.create_level)
         self.status = 'overworld'
         
 
     def create_level(self, current_level):
-        self.level = Level(current_level, screen)
+        self.current_level = current_level
+        self.level = Level(current_level, screen, self.create_overworld)
         self.status = 'level'
+    
+    def create_overworld(self, level_pos):
+        self.current_level = level_pos
+        self.overworld = Overworld(level_pos, self.max_level, screen, self.create_level)
+        self.status = 'overworld'
+
               
               
     def run(self):

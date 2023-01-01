@@ -14,8 +14,9 @@ from gamedata import levels
 
 
 class Level:
-    def __init__(self, current_level, surface):
+    def __init__(self, current_level, surface, create_overworld):
         #level setup
+        self.create_overworld = create_overworld
         self.current_level = current_level
         self.level_data = levels[self.current_level]
         self.display_surface = surface
@@ -75,7 +76,17 @@ class Level:
         self.water = Water((screen_height - 20), level_width)
         
         
+    def level_switch(self):
+        keys = pygame.key.get_pressed()
+        #enter key
+        if keys[pygame.K_RETURN]:
+            self.current_level += 1
+            self.create_overworld(self.current_level)
+        if keys[pygame.K_ESCAPE]:
+            self.create_overworld(self.current_level)
+        
 
+        
 
 
     def create_tile_group(self, layout, type):
@@ -146,14 +157,11 @@ class Level:
                     sprite = StaticTile((x, y), tile_size, hat_surface)
                     self.goal.add(sprite)
 
-
-
     def enemy_collision_reverse(self):
         for enemy in self.enemy_sprites.sprites():
             if pygame.sprite.spritecollide(enemy, self.constraint_sprites, False):
                 enemy.reverse()
         
-   
     def create_jump_particles(self, pos):
         if self.player.sprite.facing_right:
             pos -= pygame.math.Vector2(10, 5)
@@ -254,7 +262,7 @@ class Level:
             player.on_ceiling = False
                        
     def run(self):
-        
+        self.level_switch()
         #sky
         self.sky.draw(self.display_surface)
         self.clouds.draw(self.display_surface, self.world_shift)
