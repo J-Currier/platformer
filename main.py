@@ -8,10 +8,20 @@ from overworld import Overworld
 class Game:
     def __init__(self):
         self.max_level = 3
-        self.overworld = Overworld(1, self.max_level, screen)
+        self.overworld = Overworld(1, self.max_level, screen, self.create_level)
+        self.status = 'overworld'
+        
 
+    def create_level(self, current_level):
+        self.level = Level(current_level, screen)
+        self.status = 'level'
+              
+              
     def run(self):
-        self.overworld.run()   
+        if self.status == 'overworld':
+            self.overworld.run()   
+        else:
+            self.level.run()
     
 #pygame set up
 pygame.init()

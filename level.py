@@ -29,7 +29,7 @@ class Level:
         self.player_on_ground = False
 
         #player
-        player_layout= import_csv_layout(self.['player'])
+        player_layout= import_csv_layout(self.level_data['player'])
         self.player = pygame.sprite.GroupSingle()
         self.goal = pygame.sprite.GroupSingle()
         self.player_setup(player_layout)
@@ -39,31 +39,31 @@ class Level:
         self.terrain_sprites = self.create_tile_group(terrain_layout, 'terrain')
         
         #grass set up
-        grass_layout = import_csv_layout((self.level_data['grass'])
+        grass_layout = import_csv_layout(self.level_data['grass'])
         self.grass_sprites = self.create_tile_group(grass_layout, 'grass')
         
         #crates set up
-        crate_layout = import_csv_layout((self.level_data['crates'])
+        crate_layout = import_csv_layout(self.level_data['crates'])
         self.crate_sprites = self.create_tile_group(crate_layout, 'crates')
         
         #coins
-        coin_layout = import_csv_layout((self.level_data['coins'])
+        coin_layout = import_csv_layout(self.level_data['coins'])
         self.coin_sprites = self.create_tile_group(coin_layout, 'coins')
         
         #palmtrees foreground
-        fg_palm_layout = import_csv_layout((self.level_data['fg_palms'])
+        fg_palm_layout = import_csv_layout(self.level_data['fg_palms'])
         self.fg_palm_sprites = self.create_tile_group(fg_palm_layout, 'fg_palms')
         
         #palmtrees foreground
-        bg_palm_layout = import_csv_layout((self.level_data['bg_palms'])
+        bg_palm_layout = import_csv_layout(self.level_data['bg_palms'])
         self.bg_palm_sprites = self.create_tile_group(bg_palm_layout, 'bg_palms')
         
         #enemies
-        enemy_layout = import_csv_layout((self.level_data['enemies'])
+        enemy_layout = import_csv_layout(self.level_data['enemies'])
         self.enemy_sprites = self.create_tile_group(enemy_layout, 'enemies')
         
         #enemy constraint
-        constraint_layout = import_csv_layout((self.level_data['constraints'])
+        constraint_layout = import_csv_layout(self.level_data['constraints'])
         self.constraint_sprites = self.create_tile_group(constraint_layout, 'constraints')
         
         #sky
