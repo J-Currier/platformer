@@ -21,6 +21,8 @@ lu normailze vector (vector2) 43 45
 1 02 14
 1 05 09*** level changes
 1 15 38
+1 22 55
+
 
 
 *set up file structure 41:40 (gamedata)

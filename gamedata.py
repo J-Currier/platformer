@@ -11,7 +11,9 @@ level_0 = {
     'constraints': ['2 - Level', 'levels', '0', 'level_0._constraints.csv'],
     'player': ['2 - Level', 'levels', '0', 'level_0._player.csv'],
     'grass': ['2 - Level', 'levels', '0', 'level_0._grass.csv'],
-    'content': 'This is Level 0'
+    'content': 'This is Level 0',
+    'node_graphics' : ['graphics', 'overworld','0']
+    
 }
 
 level_1 = {
@@ -26,7 +28,9 @@ level_1 = {
     'constraints': ['2 - Level', 'levels', '0', 'level_0._constraints.csv'],
     'player': ['2 - Level', 'levels', '0', 'level_0._player.csv'],
     'grass': ['2 - Level', 'levels', '0', 'level_0._grass.csv'],
-    'content': 'This is Level 1'
+    'content': 'This is Level 1',
+    'node_graphics' : ['graphics', 'overworld','1']
+
 }
 
 level_2 = {
@@ -42,7 +46,9 @@ level_2 = {
     'player': ['2 - Level', 'levels', '0', 'level_0._player.csv'],
     'grass': ['2 - Level', 'levels', '0', 'level_0._grass.csv'],
     
-    'content': 'This is Level 2'
+    'content': 'This is Level 2',
+    'node_graphics' : ['graphics', 'overworld','2']
+
 }
 
 level_3 = {
@@ -57,7 +63,10 @@ level_3 = {
     'constraints': ['2 - Level', 'levels', '0', 'level_0._constraints.csv'],
     'player': ['2 - Level', 'levels', '0', 'level_0._player.csv'],
     'grass': ['2 - Level', 'levels', '0', 'level_0._grass.csv'],
-    'content': 'This is Level 3'
+    'content': 'This is Level 3',
+    'node_graphics' : ['graphics', 'overworld','3']
+
+
 }
 
 level_4 = {
@@ -72,7 +81,9 @@ level_4 = {
     'constraints': ['2 - Level', 'levels', '0', 'level_0._constraints.csv'],
     'player': ['2 - Level', 'levels', '0', 'level_0._player.csv'],
     'grass': ['2 - Level', 'levels', '0', 'level_0._grass.csv'],
-    'content': 'This is Level 4'
+    'content': 'This is Level 4',
+    'node_graphics' : ['graphics', 'overworld','4']
+
 }
 
 level_5 = {
@@ -87,7 +98,9 @@ level_5 = {
     'constraints': ['2 - Level', 'levels', '0', 'level_0._constraints.csv'],
     'player': ['2 - Level', 'levels', '0', 'level_0._player.csv'],
     'grass': ['2 - Level', 'levels', '0', 'level_0._grass.csv'],
-    'content': 'This is Level 0'
+    'content': 'This is Level 0',
+    'node_graphics' : ['graphics', 'overworld','5']
+
 }
 
 levels = {
