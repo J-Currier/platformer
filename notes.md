@@ -24,6 +24,7 @@ lu normailze vector (vector2) 43 45
 1 22 55
 1 30 00
 1 32 22
+1 34 51
  
 
 

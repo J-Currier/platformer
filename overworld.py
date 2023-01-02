@@ -1,5 +1,6 @@
 import pygame
-from gamedata import levels
+from gamedata import levels 
+from os import path
 
 
 class Node(pygame.sprite.Sprite):
@@ -16,15 +17,12 @@ class Node(pygame.sprite.Sprite):
         #target rect needs to be h and w = to speed so that icon doesn't over shoot without triggering a collision
         self.detection_zone = pygame.Rect((self.rect.centerx - (icon_speed/2)), (self.rect.centery - (icon_speed/2)), icon_speed, icon_speed)
             
-        
-
             
 class Icon(pygame.sprite.Sprite):
     def __init__(self, pos):
         super().__init__()
         self.pos = pos
-        self.image = pygame.Surface((20, 20))
-        self.image.fill('cyan')
+        self.image = pygame.image.load(path.join('graphics', 'overworld', 'hat.png')).convert_alpha()
         self.rect = self.image.get_rect(center = pos)
         
     def update(self):
