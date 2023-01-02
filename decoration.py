@@ -26,6 +26,14 @@ class Sky:
                 y = (self.horizon * tile_size) + randint(50, 100)
                 rect = surface.get_rect(midbottom = (x, y))
                 self.palms.append((surface, rect))
+                
+            cloud_surface = import_folder(path.join('graphics', 'overworld', 'clouds'))
+            self.clouds = []
+            for surface in [choice(cloud_surface) for image in range(6)]:
+                x = randint( 0, screen_width)
+                y =  randint(0, (self.horizon * tile_size)- 100 )
+                rect = surface.get_rect(midbottom = (x, y))
+                self.clouds.append((surface, rect))
             
         
     def draw(self, surface):
@@ -40,7 +48,9 @@ class Sky:
         
         if self.style == 'overworld':
             for palm in self.palms:
-                surface.blit(palm[0], palm[1])        
+                surface.blit(palm[0], palm[1])  
+            for cloud in self.clouds:
+                surface.blit(cloud[0], cloud[1]  )    
     
     
 class Water: 
