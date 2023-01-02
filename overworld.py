@@ -63,7 +63,7 @@ class Overworld:
         #sprites
         self.setup_nodes()
         self.setup_icon()
-        self.sky = Sky(8)
+        self.sky = Sky(8, 'overworld')
         
     def setup_nodes(self):
         #creates level nodes and either locks or opens them based on current level completed
