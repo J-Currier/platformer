@@ -46,9 +46,10 @@ class AnimatedTile(Tile):
         self.rect.x += x_shift
         
 class Coin(AnimatedTile):
-    def __init__(self, pos, size, *my_path):
+    def __init__(self, pos, size, value, *my_path):
         super().__init__(pos, size, *my_path)
         #sprite = Coin((x, y), tile_size, 0, 'graphics', 'coins', 'silver')
+        self.value = value
 
         center_x = pos[0] + int(tile_size / 2)
         center_y = pos[1] + int(tile_size / 2)

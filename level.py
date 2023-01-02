@@ -121,9 +121,9 @@ class Level:
                     if type == 'coins':
                         print('im a coin')
                         if item == '0':
-                            sprite = Coin((x, y), tile_size, 2, 'graphics', 'coins', 'gold')
+                            sprite = Coin((x, y), tile_size, 5, 5, 'graphics', 'coins', 'gold')
                         if item == '1':
-                            sprite = Coin((x, y), tile_size, 2, 'graphics', 'coins', 'silver')
+                            sprite = Coin((x, y), tile_size, 1, 1,'graphics', 'coins', 'silver')
                         
                     if type == 'fg_palms':
                         if item == '0':
@@ -279,7 +279,7 @@ class Level:
         collided_coins = pygame.sprite.spritecollide(self.player.sprite, self.coin_sprites, True)
         if collided_coins:
             for coin in collided_coins:
-                self.change_coins(1)
+                self.change_coins(coin.value)
         
         
                       
