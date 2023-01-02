@@ -29,6 +29,9 @@ class Level:
         #dust
         self.dust_sprite = pygame.sprite.GroupSingle()
         self.player_on_ground = False
+        
+        #explosion particles
+        self.explosion_sprites = pygame.sprite.Group()
 
         #player
         player_layout= import_csv_layout(self.level_data['player'])
@@ -281,7 +284,22 @@ class Level:
             for coin in collided_coins:
                 self.change_coins(coin.value)
         
+    def check_enemy_collisons(self):
+        enemy_collisions = pygame.sprite.spritecollide(self.player.sprite, self.enemy_sprites, False)
         
+        if enemy_collisions:
+            for enemy in enemy_collisions:
+                enemy_center = enemy.rect.centery
+                enemy_top = enemy.rect.top
+                player_bottom = self.player.sprite.rect.bottom   
+                if enemy_top < player_bottom < enemy_center and self.player.sprite.direction.y >= 0:
+                    self.player.sprite.direction.y = -15
+                    explosion_sprite = ParticleEffect(enemy.rect.center, 'explode')
+                    self.explosion_sprites.add(explosion_sprite)
+                    
+                    enemy.kill()
+                    
+                    
                       
     def run(self):
         self.check_win()
@@ -306,6 +324,8 @@ class Level:
         self.constraint_sprites.update(self.world_shift)
         self.enemy_collision_reverse()
         self.enemy_sprites.draw(self.display_surface)
+        self.explosion_sprites.update(self.world_shift)
+        self.explosion_sprites.draw(self.display_surface)
 
 
         #crate
@@ -340,6 +360,7 @@ class Level:
         self.dust_sprite.draw(self.display_surface)
 
         self.check_coin_collisions()
+        self.check_enemy_collisons()
         
 
 

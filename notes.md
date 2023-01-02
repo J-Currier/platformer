@@ -31,8 +31,12 @@ lu normailze vector (vector2) 43 45
 whoohoo!!!!
 
  last vid!!!!!
+ https://www.youtube.com/watch?v=4jdJhUfMycQ&t=0s
 28  00
-https://www.youtube.com/watch?v=4jdJhUfMycQ&t=0s
+35 50
+
+
+
 
 
  lu how to make sprite collisons when the picture collides not just the whole rectangle (convert alpha? )  1 43:13 in thirsd video (overworld video)
