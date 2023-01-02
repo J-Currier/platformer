@@ -260,8 +260,14 @@ class Level:
             player.on_ground = False
         if player.on_ceiling and player.direction.y > 0:
             player.on_ceiling = False
-                       
+     
+    def check_death(self):
+        if self.player.sprite.rect.top > screen_height:
+            self.create_overworld(self.current_level)
+        
+                      
     def run(self):
+        self.check_death()
         self.level_switch()
         #sky
         self.sky.draw(self.display_surface)

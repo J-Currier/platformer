@@ -22,6 +22,8 @@ lu normailze vector (vector2) 43 45
 1 05 09*** level changes
 1 15 38
 1 22 55
+1 30 00
+ 
 
 
 
@@ -46,7 +48,7 @@ tutorial @ https://www.youtube.com/watch?v=wJMDh9QGRgs *3:09:23
 2 38 56
 2 51 31
 
-
+ 
 tutorial @ hhttps://www.youtube.com/watch?v=wJMDh9QGRgs *3:09:23
 11:40
 16:14

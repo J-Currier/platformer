@@ -35,8 +35,7 @@ class Game:
 pygame.init()
 screen = pygame.display.set_mode((screen_width, screen_height))
 clock = pygame.time.Clock()
-#level = Level(levels[0], screen)
-game = Game() #takeout
+game = Game() 
 
 while True:
     for event in pygame.event.get():
@@ -46,7 +45,6 @@ while True:
             
     screen.fill('black')
     game.run()
-    #level.run() #take out
     
     pygame.display.update()
     clock.tick(60)
