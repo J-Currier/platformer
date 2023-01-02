@@ -31,7 +31,7 @@ lu normailze vector (vector2) 43 45
 whoohoo!!!!
 
  last vid!!!!!
-
+28  00
 https://www.youtube.com/watch?v=4jdJhUfMycQ&t=0s
 
 

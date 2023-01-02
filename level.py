@@ -15,7 +15,7 @@ from time import sleep
 
 
 class Level:
-    def __init__(self, current_level, surface, create_overworld):
+    def __init__(self, current_level, surface, create_overworld, change_coin):
         #level setup
         self.create_overworld = create_overworld
         self.current_level = current_level
@@ -35,6 +35,9 @@ class Level:
         self.player = pygame.sprite.GroupSingle()
         self.goal = pygame.sprite.GroupSingle()
         self.player_setup(player_layout)
+        
+        #UI
+        self.change_coins = change_coin
         
         #terrain layout level arcitecture lu 
         terrain_layout= import_csv_layout(self.level_data['terrain'])
@@ -272,6 +275,13 @@ class Level:
             sleep(.5)
             self.create_overworld(self.current_level)
         
+    def check_coin_collisions(self):
+        collided_coins = pygame.sprite.spritecollide(self.player.sprite, self.coin_sprites, True)
+        if collided_coins:
+            for coin in collided_coins:
+                self.change_coins(1)
+        
+        
                       
     def run(self):
         self.check_win()
@@ -329,7 +339,7 @@ class Level:
         self.dust_sprite.update(self.world_shift)
         self.dust_sprite.draw(self.display_surface)
 
-        
+        self.check_coin_collisions()
         
 
 
