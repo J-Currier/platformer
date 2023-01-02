@@ -26,10 +26,11 @@ lu normailze vector (vector2) 43 45
 1 32 22
 1 34 51
 1 36 05
+1 41 08
  
 
 
- lu how to make sprite collisons when the picture collides not just the whole rectangle (convert alpha? )
+ lu how to make sprite collisons when the picture collides not just the whole rectangle (convert alpha? )  1 43:13 in thirsd video (overworld video)
 
 
 

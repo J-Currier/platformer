@@ -2,6 +2,7 @@ import pygame
 from gamedata import levels 
 from os import path
 from support import import_folder
+from decoration import Sky
 
 
 class Node(pygame.sprite.Sprite):
@@ -27,7 +28,12 @@ class Node(pygame.sprite.Sprite):
         self.image = self.frames[int(self.frame_index)]
         
     def update(self):
-        self.animate()
+        if self.status== 'available':
+            self.animate()
+        else:
+            tint_surface = self.image.copy()
+            tint_surface.fill('black', None, pygame.BLEND_RGBA_MULT)
+            self.image.blit(tint_surface, (0,0))
             
 class Icon(pygame.sprite.Sprite):
     def __init__(self, pos):
@@ -57,6 +63,7 @@ class Overworld:
         #sprites
         self.setup_nodes()
         self.setup_icon()
+        self.sky = Sky(8)
         
     def setup_nodes(self):
         #creates level nodes and either locks or opens them based on current level completed
@@ -130,7 +137,7 @@ class Overworld:
         self.update_icon_pos()
         self.icon.update()
         self.nodes.update()
-        
+        self.sky.draw(self.display_surface)
         self.draw_paths()
         self.nodes.draw(self.display_surface)
         self.icon.draw(self.display_surface)
