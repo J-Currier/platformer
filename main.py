@@ -5,6 +5,7 @@ from level import Level
 from gamedata import levels
 from overworld import Overworld
 
+
 class Game:
     def __init__(self):
         self.max_level = 0

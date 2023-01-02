@@ -10,6 +10,7 @@ from os import path
 from enemy import Enemy
 from decoration import Sky, Water, Cloud
 from gamedata import levels
+from time import sleep
 
 
 
@@ -265,8 +266,15 @@ class Level:
         if self.player.sprite.rect.top > screen_height:
             self.create_overworld(self.current_level)
         
+    def check_win(self):
+        if pygame.sprite.spritecollide(self.player.sprite, self.goal, False):
+            self.current_level += 1 
+            sleep(.5)
+            self.create_overworld(self.current_level)
+        
                       
     def run(self):
+        self.check_win()
         self.check_death()
         self.level_switch()
         #sky
