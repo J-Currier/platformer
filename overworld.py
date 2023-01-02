@@ -1,22 +1,33 @@
 import pygame
 from gamedata import levels 
 from os import path
+from support import import_folder
 
 
 class Node(pygame.sprite.Sprite):
     #creates nodes for each level
-    def __init__(self, pos, status, icon_speed):
+    def __init__(self, pos, status, icon_speed, mypath):
         super().__init__()
-
-        self.image = pygame.Surface((100, 80)) 
+        mypaths = path.join(*mypath)
+        self.frames = import_folder(mypaths)
+        self.frame_index = 0
+        self.image = self.frames[self.frame_index] 
         if status == 'available':
-            self.image.fill('darkviolet')
+            self.status = 'available'
         else:
-            self.image.fill('dark blue')
+            self.status = 'locked'
         self.rect = self.image.get_rect(center = pos)
         #target rect needs to be h and w = to speed so that icon doesn't over shoot without triggering a collision
         self.detection_zone = pygame.Rect((self.rect.centerx - (icon_speed/2)), (self.rect.centery - (icon_speed/2)), icon_speed, icon_speed)
-            
+        
+    def animate(self):
+        self.frame_index += 0.15
+        if self.frame_index >= len(self.frames):
+            self.frame_index = 0
+        self.image = self.frames[int(self.frame_index)]
+        
+    def update(self):
+        self.animate()
             
 class Icon(pygame.sprite.Sprite):
     def __init__(self, pos):
@@ -52,9 +63,10 @@ class Overworld:
         self.nodes = pygame.sprite.Group()
         for index, node_data in enumerate(levels.values()):
             if index <= self.max_level:
-                node_sprite = Node(node_data['node_pos'], 'available', self.speed)           
+                print(node_data['node_graphics'], 'node data')
+                node_sprite = Node(node_data['node_pos'], 'available', self.speed, node_data['node_graphics']) #*******         
             else:
-                node_sprite = Node(node_data['node_pos'], 'locked', self.speed)
+                node_sprite = Node(node_data['node_pos'], 'locked', self.speed, node_data['node_graphics'])
             self.nodes.add(node_sprite)
             
     def draw_paths(self):
@@ -91,8 +103,6 @@ class Overworld:
             elif keys[pygame.K_SPACE]:
                 self.create_level(self.current_level)
                 
-
-            
     def get_movement_data(self, target):
         #calculates the degree of the path between nodes
         start = pygame.math.Vector2(self.nodes.sprites()[self.current_level].rect.center)
@@ -119,6 +129,8 @@ class Overworld:
         self.input()
         self.update_icon_pos()
         self.icon.update()
+        self.nodes.update()
+        
         self.draw_paths()
         self.nodes.draw(self.display_surface)
         self.icon.draw(self.display_surface)
