@@ -4,6 +4,7 @@ from tiles import Tile
 from level import Level
 from overworld import Overworld
 from ui import UI
+from os import path
 
 
 class Game:
@@ -15,21 +16,38 @@ class Game:
         self.current_health = 100
         self.coins = 0
         self.current_level = 0
-        
+
+        #audio
+        self.play_music = False
+        self.level_bg_music = pygame.mixer.Sound(path.join('audio', 'level_music.wav'))
+        self.overworld_bg_music =pygame.mixer.Sound(path.join('audio', 'overworld_music.wav'))
+
         #overworld creation
         self.overworld = Overworld(self.current_level, self.max_level, screen, self.create_level)
         self.status = 'overworld'
+        if self.play_music:
+            self.overworld_bg_music.play(loops = -1)
         
         #UI 
         self.ui = UI(screen)
+        
         
         
 
     def create_level(self, current_level):
         self.level = Level(current_level, screen, self.create_overworld, self.change_coins, self.change_health)
         self.status = 'level'
+        self.overworld_bg_music.stop()
+        if self.play_music:
+            self.level_bg_music.play(loops = -1)
+
     
     def create_overworld(self, level_pos):
+        self.level_bg_music.stop()
+        if self.play_music:
+            self.overworld_bg_music.play(loops = -1)
+
+            
         self.current_level = level_pos
         if level_pos > self.max_level:
             self.max_level = level_pos
@@ -47,8 +65,13 @@ class Game:
         if self.current_health <= 0:
             self.current_health = 100
             self.coins = 0
+            
             Overworld(0, self.max_level, screen, self.create_level)
             self.status = 'overworld'
+            self.level_bg_music.stop()
+            if self.play_music:
+                self.overworld_bg_music.play(loops = -1)
+
             
               
     def run(self):

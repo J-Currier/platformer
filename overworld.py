@@ -63,6 +63,7 @@ class Overworld:
         #sprites
         self.setup_nodes()
         self.setup_icon()
+        self.sky= Sky(8, 'overworld')
         
         #time 
         self.start_time = pygame.time.get_ticks()

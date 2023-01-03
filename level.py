@@ -26,6 +26,10 @@ class Level:
         self.current_x = None
         self.new_max_level = self.level_data['unlock']
         
+        #audio
+        self.coin_sound = pygame.mixer.Sound(path.join('audio', 'effects', 'coin.wav'))
+        self.stomp_sound = pygame.mixer.Sound(path.join('audio', 'effects', 'stomp.wav'))
+        
         #dust
         self.dust_sprite = pygame.sprite.GroupSingle()
         self.player_on_ground = False
@@ -276,6 +280,7 @@ class Level:
     def check_coin_collisions(self):
         collided_coins = pygame.sprite.spritecollide(self.player.sprite, self.coin_sprites, True)
         if collided_coins:
+            self.coin_sound.play()
             for coin in collided_coins:
                 self.change_coins(coin.value)
         
@@ -284,6 +289,7 @@ class Level:
         
         if enemy_collisions:
             for enemy in enemy_collisions:
+                self.stomp_sound.play()
                 enemy_center = enemy.rect.centery
                 enemy_top = enemy.rect.top
                 player_bottom = self.player.sprite.rect.bottom   

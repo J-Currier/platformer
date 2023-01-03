@@ -40,6 +40,10 @@ class Player(pygame.sprite.Sprite):
         self.on_left = False
         self.on_right = False
         
+        #audio
+        self.jump_sound = pygame.mixer.Sound(path.join('audio', 'effects', 'jump.wav'))
+        self.hit_sound = pygame.mixer.Sound(path.join('audio', 'effects', 'hit.wav'))
+        
     def import_character_assests(self):
         my_path = path.join("graphics", "character")
         #character_path = '../graphics/character/'#changed
@@ -137,9 +141,11 @@ class Player(pygame.sprite.Sprite):
     
     def jump(self):
         self.direction.y = self.jump_speed
+        self.jump_sound.play()
         
     def get_damage(self):
-        if not self.invincible:   
+        if not self.invincible: 
+            self.hit_sound.play()  
             self.change_health(-10)
             self.invincible = True
             self.hurt_time = pygame.time.get_ticks()
