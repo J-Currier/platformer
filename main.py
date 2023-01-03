@@ -27,6 +27,7 @@ class Game:
         self.status = 'overworld'
         if self.play_music:
             self.overworld_bg_music.play(loops = -1)
+            
         
         #UI 
         self.ui = UI(screen)
@@ -72,7 +73,9 @@ class Game:
             if self.play_music:
                 self.overworld_bg_music.play(loops = -1)
 
+
             
+        
               
     def run(self):
         if self.status == 'overworld':
