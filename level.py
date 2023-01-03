@@ -325,6 +325,9 @@ class Level:
         self.explosion_sprites.update(self.world_shift)
         self.explosion_sprites.draw(self.display_surface)
 
+        #dust particles
+        self.dust_sprite.update(self.world_shift)
+        self.dust_sprite.draw(self.display_surface)
 
         #crate
         self.crate_sprites.update(self.world_shift)
@@ -353,9 +356,6 @@ class Level:
         self.goal.draw(self.display_surface)
         
        
-        #dust particles
-        self.dust_sprite.update(self.world_shift)
-        self.dust_sprite.draw(self.display_surface)
 
         self.check_coin_collisions()
         self.check_enemy_collisons()
