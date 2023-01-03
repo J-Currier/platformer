@@ -1,15 +1,22 @@
 import pygame
 from support import import_folder
 from os import path
+from math import sin
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, surface, create_jump_particles):
+    def __init__(self, pos, surface, create_jump_particles, change_health):
         super().__init__()
         self.import_character_assests()
         self.frame_index = 0
         self.animation_speed = 0.15
         self.image = self.animations['idle'][self.frame_index]
         self.rect = self.image.get_rect(topleft = pos)
+        
+        self.change_health = change_health
+        self.invincible = False
+        self.invincible_duration = 500
+        self.hurt_time = 0
+        
  
         #dust particles       
         self.import_dust_run_particles()
@@ -65,7 +72,12 @@ class Player(pygame.sprite.Sprite):
         else: 
             flipped_image = pygame.transform.flip(image, True, False) #(surface, flip horiz., flip vert.)
             self.image = flipped_image
-            
+        
+        #flicker effect for invincibility
+        if self.invincible:
+            alpha = self.wave_value()
+            self.image.set_alpha(alpha)
+        else: self.image.set_alpha(255)    
         #set origin point for animation png on rect
         if self.on_ground and self.on_right:
             self.rect = self.image.get_rect(bottomright = self.rect.bottomright)
@@ -98,8 +110,6 @@ class Player(pygame.sprite.Sprite):
                 pos = self.rect.bottomright - pygame.math.Vector2(6, 10)
                 self.display_surface.blit(flipped_dust, pos)
                 
-        
-              
     def get_input(self):
         keys = pygame.key.get_pressed()
         
@@ -127,16 +137,36 @@ class Player(pygame.sprite.Sprite):
             else:
                 self.status = 'idle' 
             
-            
     def apply_gravity(self):
         self.direction.y += self.gravity #makes gravity increase every frame
         self.rect.y += self.direction.y
     
     def jump(self):
         self.direction.y = self.jump_speed
+        
+    def get_damage(self):
+        if not self.invincible:   
+            self.change_health(-10)
+            self.invincible = True
+            self.hurt_time = pygame.time.get_ticks()
+            
+    def invincible_timer(self):
+        if self.invincible:
+            current_time = pygame.time.get_ticks()
+            if current_time >= self.hurt_time + self.invincible_duration:
+                self.invincible = False
     
+    def wave_value(self):
+        #timer for flickering when player is invincible
+        value = sin(pygame.time.get_ticks())
+        if value >= 0:
+            return 255
+        else:
+            return 0
+                 
     def update(self):
         self.get_input()
         self.get_status()
         self.animate()
         self.run_dust_animation()
+        self.invincible_timer()

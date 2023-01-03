@@ -34,6 +34,13 @@ whoohoo!!!!
  https://www.youtube.com/watch?v=4jdJhUfMycQ&t=0s
 28  00
 35 50
+50 07
+done
+
+
+to do- sound
+pause when moving to overworld
+fix movment glitches? 
 
 
 

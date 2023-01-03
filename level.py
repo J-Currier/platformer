@@ -15,7 +15,7 @@ from time import sleep
 
 
 class Level:
-    def __init__(self, current_level, surface, create_overworld, change_coin):
+    def __init__(self, current_level, surface, create_overworld, change_coin, change_health):
         #level setup
         self.create_overworld = create_overworld
         self.current_level = current_level
@@ -37,10 +37,11 @@ class Level:
         player_layout= import_csv_layout(self.level_data['player'])
         self.player = pygame.sprite.GroupSingle()
         self.goal = pygame.sprite.GroupSingle()
-        self.player_setup(player_layout)
+        self.player_setup(player_layout, change_health)
         
         #UI
         self.change_coins = change_coin
+        self.change_health = change_health
         
         #terrain layout level arcitecture lu 
         terrain_layout= import_csv_layout(self.level_data['terrain'])
@@ -149,14 +150,14 @@ class Level:
             
         return sprite_group
     
-    def player_setup(self, layout):
+    def player_setup(self, layout, change_health):
         for row_index, row in enumerate(layout):
             for item_index, item in enumerate(row):
                 x = item_index * tile_size
                 y = row_index * tile_size
 
                 if item == '1':
-                    sprite = Player((x, y), self.display_surface, self.create_jump_particles)
+                    sprite = Player((x, y), self.display_surface, self.create_jump_particles, change_health)
                     self.player.add(sprite)
                     print('player', self.player)
                 if item == '2':
@@ -296,8 +297,11 @@ class Level:
                     self.player.sprite.direction.y = -15
                     explosion_sprite = ParticleEffect(enemy.rect.center, 'explode')
                     self.explosion_sprites.add(explosion_sprite)
-                    
                     enemy.kill()
+                else:
+                    self.player.sprite.get_damage()
+                        
+                
                     
                     
                       
