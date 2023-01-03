@@ -30,6 +30,7 @@ class Player(pygame.sprite.Sprite):
         self.speed = 8
         self.gravity = 0.8
         self.jump_speed = -16 #neagtive b/c player jumps UP
+        self.collision_rect =pygame.Rect(self.rect.topleft, (50, self.rect.height))
         
         #player status
         self.status = 'idle'
@@ -67,18 +68,23 @@ class Player(pygame.sprite.Sprite):
             self.frame_index = 0
         
         image = animation[int(self.frame_index)]
+        
         if self.facing_right:
             self.image = image
+            self.rect.bottomleft = self.collision_rect.bottomleft
         else: 
             flipped_image = pygame.transform.flip(image, True, False) #(surface, flip horiz., flip vert.)
             self.image = flipped_image
+            self.rect.bottomright = self.collision_rect.bottomright
         
         #flicker effect for invincibility
         if self.invincible:
             alpha = self.wave_value()
             self.image.set_alpha(alpha)
-        else: self.image.set_alpha(255)    
-        #set origin point for animation png on rect
+        else: self.image.set_alpha(255)  
+        
+        #change  
+        '''#set origin point for animation png on rect
         if self.on_ground and self.on_right:
             self.rect = self.image.get_rect(bottomright = self.rect.bottomright)
         elif self.on_ground and self.on_left:
@@ -91,7 +97,7 @@ class Player(pygame.sprite.Sprite):
         elif self.on_ceiling and self.on_left:
             self.rect = self.image.get_rect(topleft = self.rect.topleft)
         elif self.on_ceiling:
-            self.rect = self.image.get_rect(midtop = self.rect.midtop)
+            self.rect = self.image.get_rect(midtop = self.rect.midtop)'''
             
     def run_dust_animation(self):
         if self.status == 'run' and self.on_ground:
@@ -139,7 +145,7 @@ class Player(pygame.sprite.Sprite):
             
     def apply_gravity(self):
         self.direction.y += self.gravity #makes gravity increase every frame
-        self.rect.y += self.direction.y
+        self.collision_rect.y += self.direction.y
     
     def jump(self):
         self.direction.y = self.jump_speed

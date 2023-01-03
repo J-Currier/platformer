@@ -38,6 +38,10 @@ whoohoo!!!!
 done
 
 
+https://www.youtube.com/watch?v=hEL3wO-EOZg&list=PL8ui5HK3oSiGXM2Pc2DahNu1xXBf7WQh-&index=6
+
+
+
 to do- sound
 pause when moving to overworld
 fix movment glitches? 
