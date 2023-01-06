@@ -1,4 +1,3 @@
-from turtle import speed
 import pygame
 from particles import ParticleEffect
 from tiles import Tile, StaticTile, Crate, Coin, Palm

@@ -48,12 +48,14 @@ class Game:
         if self.play_music:
             self.overworld_bg_music.play(loops = -1)
 
-            
-        self.current_level = level_pos
+        if level_pos <= 5:    
+            self.current_level = level_pos
+        else:
+            self.current_level = 5
         if level_pos > self.max_level:
             self.max_level = level_pos
                         
-        self.overworld = Overworld(level_pos, self.max_level, screen, self.create_level)
+        self.overworld = Overworld(self.current_level, self.max_level, screen, self.create_level)
         self.status = 'overworld'
 
     def change_coins(self, amount):
