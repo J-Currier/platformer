@@ -1,4 +1,4 @@
-#data for each game level
+#data for each game level node position in overworld, next level unlocked, file paths for level data
 level_0 = {
     'node_pos': (110, 400),
     'unlock': 1,
@@ -11,9 +11,7 @@ level_0 = {
     'constraints': ['2 - Level', 'levels', '0', 'level_0._constraints.csv'],
     'player': ['2 - Level', 'levels', '0', 'level_0._player.csv'],
     'grass': ['2 - Level', 'levels', '0', 'level_0._grass.csv'],
-    'content': 'This is Level 0',
     'node_graphics' : ['graphics', 'overworld','0']
-    
 }
 
 level_1 = {
@@ -28,9 +26,7 @@ level_1 = {
     'constraints': ['2 - Level', 'levels', '1', 'level_1_constraints.csv'],
     'player': ['2 - Level', 'levels', '1', 'level_1_player.csv'],
     'grass': ['2 - Level', 'levels', '1', 'level_1_grass.csv'],
-    'content': 'This is Level 1',
     'node_graphics' : ['graphics', 'overworld','1']
-
 }
 
 level_2 = {
@@ -45,10 +41,7 @@ level_2 = {
     'constraints': ['2 - Level', 'levels', '2', 'level_2_constraints.csv'],
     'player': ['2 - Level', 'levels', '2', 'level_2_player.csv'],
     'grass': ['2 - Level', 'levels', '2', 'level_2_grass.csv'],
-    
-    'content': 'This is Level 2',
     'node_graphics' : ['graphics', 'overworld','2']
-
 }
 
 level_3 = {
@@ -63,10 +56,7 @@ level_3 = {
     'constraints': ['2 - Level', 'levels', '3', 'level_3_constraints.csv'],
     'player': ['2 - Level', 'levels', '3', 'level_3_player.csv'],
     'grass': ['2 - Level', 'levels', '3', 'level_3_grass.csv'],
-    'content': 'This is Level 3',
     'node_graphics' : ['graphics', 'overworld','3']
-
-
 }
 
 level_4 = {
@@ -81,9 +71,7 @@ level_4 = {
     'constraints': ['2 - Level', 'levels', '4', 'level_4_constraints.csv'],
     'player': ['2 - Level', 'levels', '4', 'level_4_player.csv'],
     'grass': ['2 - Level', 'levels', '4', 'level_4_grass.csv'],
-    'content': 'This is Level 4',
     'node_graphics' : ['graphics', 'overworld','4']
-
 }
 
 level_5 = {
@@ -98,9 +86,7 @@ level_5 = {
     'constraints': ['2 - Level', 'levels', '5', 'level_5_constraints.csv'],
     'player': ['2 - Level', 'levels', '5', 'level_5_player.csv'],
     'grass': ['2 - Level', 'levels', '5', 'level_5_grass.csv'],
-    'content': 'This is Level 0',
     'node_graphics' : ['graphics', 'overworld','5']
-
 }
 
 levels = {

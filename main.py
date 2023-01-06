@@ -72,6 +72,13 @@ class Game:
             self.level_bg_music.stop()
             if self.play_music:
                 self.overworld_bg_music.play(loops = -1)
+                
+                
+    '''def toggle_audio():
+        keys = pygame.key.get_pressed()
+        
+        if keys[pygame.K_x]:'''
+
 
 
             
