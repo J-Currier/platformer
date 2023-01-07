@@ -20,7 +20,8 @@ class Level:
         self.current_level = current_level
         self.level_data = levels[self.current_level]
         self.display_surface = surface
-        self.setup_level(self.level_data)
+        #self.setup_level(self.level_data)
+        self.tiles = pygame.sprite.Group()
         self.world_shift = 0
         self.current_x = None
         self.new_max_level = self.level_data['unlock']
@@ -86,21 +87,18 @@ class Level:
         #water
         self.water = Water((screen_height - 20), level_width)
         
-        
     def level_switch(self):
+        #exits level to overworld 
         keys = pygame.key.get_pressed()
-        #enter key
+        #enter key to count as win
         if keys[pygame.K_RETURN]:
             self.current_level += 1
             self.create_overworld(self.current_level)
         if keys[pygame.K_ESCAPE]:
             self.create_overworld(self.current_level)
         
-
-        
-
-
     def create_tile_group(self, layout, type):
+        #creates the image tiles based on the csv files
         sprite_group = pygame.sprite.Group()
         
         for row_index, row in enumerate(layout):
@@ -114,19 +112,15 @@ class Level:
                         tile_surface = terrain_tile_list[int(item)]
                         sprite = StaticTile( (x, y), tile_size, tile_surface)
                         
-                        
                     if type == 'grass':
                         grass_tile_list = import_cut_graphics('graphics', 'decoration', 'grass', 'grass.png')
                         tile_surface = grass_tile_list[int(item)]
                         sprite = StaticTile( (x, y), tile_size, tile_surface)
                        
-                        
                     if type == 'crates':
                         sprite = Crate((x, y), tile_size)
                         
-                        
                     if type == 'coins':
-                        print('im a coin')
                         if item == '0':
                             sprite = Coin((x, y), tile_size, 5, 5, 'graphics', 'coins', 'gold')
                         if item == '1':
@@ -149,31 +143,33 @@ class Level:
                         sprite = Tile((x, y), tile_size)
                         
                     sprite_group.add(sprite)
-            
-            
         return sprite_group
     
     def player_setup(self, layout, change_health):
+        #adds player sprite and hat/end point to level
         for row_index, row in enumerate(layout):
             for item_index, item in enumerate(row):
                 x = item_index * tile_size
                 y = row_index * tile_size
 
                 if item == '1':
+                    #player sprite
                     sprite = Player((x, y), self.display_surface, self.create_jump_particles, change_health)
                     self.player.add(sprite)
-                    print('player', self.player)
                 if item == '2':
+                    #hat sprite
                     hat_surface = pygame.image.load(path.join('graphics', 'character', 'hat.png')).convert_alpha()
                     sprite = StaticTile((x, y), tile_size, hat_surface)
                     self.goal.add(sprite)
 
     def enemy_collision_reverse(self):
+        #checks for enemy sprite colliding with constraint barrier and reverses enemy direction
         for enemy in self.enemy_sprites.sprites():
             if pygame.sprite.spritecollide(enemy, self.constraint_sprites, False):
                 enemy.reverse()
         
     def create_jump_particles(self, pos):
+        #calls the dust particles when player jumps
         if self.player.sprite.facing_right:
             pos -= pygame.math.Vector2(10, 5)
         else:
@@ -183,12 +179,14 @@ class Level:
         self.dust_sprite.add(jump_particle_sprite)
     
     def get_player_on_ground(self):
+        #checks if player on ground and changes level class player on ground variable to reflect it
         if self.player.sprite.on_ground:
             self.player_on_ground = True 
         else: 
             self.player_on_ground = False
     
     def create_landing_dust(self):
+        #calls dust particles for when player lands 
         if not self.player_on_ground and self.player.sprite.on_ground and not self.dust_sprite.sprites():
             if self.player.sprite.facing_right:
                 offset = pygame.math.Vector2(10, 15)
@@ -198,22 +196,6 @@ class Level:
             fall_dust_particle = ParticleEffect(self.player.sprite.rect.midbottom - offset, 'land')
             self.dust_sprite.add(fall_dust_particle)
             
-    def setup_level(self, layout):
-        self.tiles = pygame.sprite.Group()
-        self.player = pygame.sprite.GroupSingle() #LU why add this? 28:09
-        
-        for row_index, row in enumerate(layout):
-            for col_index, cell in enumerate(row):
-                x = col_index*tile_size #left right position
-                y = row_index*tile_size #up down position
-
-                if cell == 'X':
-                    tile = Tile((x, y), tile_size)
-                    self.tiles.add(tile)
-                if cell == 'P':
-                    player_sprite = Player((x, y), self.display_surface, self.create_jump_particles) #LU passing a method to a child
-                    self.player.add(player_sprite)
-                    
     def scroll_x(self):
         player = self.player.sprite
         player_x = player.rect.centerx

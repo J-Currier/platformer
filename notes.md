@@ -109,3 +109,20 @@ bug to fix-> ~1:45 if up against a wall when jumping, when you land you teleport
 
 to do 
 add in horizon variable for init method sky and clouds (and maybe water?) in level file
+
+
+
+follwo up to do's
+edit setup level func in level.py
+removed from level.py set up level function
+        '''for row_index, row in enumerate(layout):
+            for col_index, cell in enumerate(row):
+                x = col_index*tile_size #left right position
+                y = row_index*tile_size #up down position
+
+                if cell == 'X':
+                    tile = Tile((x, y), tile_size)
+                    self.tiles.add(tile)
+                if cell == 'P':
+                    player_sprite = Player((x, y), self.display_surface, self.create_jump_particles) #LU passing a method to a child
+                    self.player.add(player_sprite)'''
