@@ -197,14 +197,15 @@ class Level:
             self.dust_sprite.add(fall_dust_particle)
             
     def scroll_x(self):
+        #scrolls the world when player enters left/right-most 25% of screen
         player = self.player.sprite
         player_x = player.rect.centerx
         direction_x = player.direction.x
         
-        if player_x < (screen_width/5) and direction_x < 0:
+        if player_x < (screen_width/4) and direction_x < 0:
             self.world_shift = 8
             player.speed = 0
-        elif player_x > (screen_width * 4/5) and direction_x > 0:
+        elif player_x > (screen_width * 3/4) and direction_x > 0:
             self.world_shift = -8
             player.speed = 0
         else: 
@@ -212,11 +213,13 @@ class Level:
             player.speed = 8
             
     def horizontal_movement_collision(self):
+        #checks for player collison with terrain, palm, and crate sprites
         player = self.player.sprite
         player.collision_rect.x += player.direction.x * player.speed
         collidable_sprites = self.terrain_sprites.sprites() + self.crate_sprites.sprites() + self.fg_palm_sprites.sprites()
         
         for sprite in collidable_sprites:
+            #checks for collision betwen sprite and the colidable rect of player(doesn't include sword)
             if sprite.rect.colliderect(player.collision_rect):
                 if player.direction.x < 0:
                     player.collision_rect.left = sprite.rect.right
@@ -227,8 +230,8 @@ class Level:
                     player.on_right = True
                     self.current_x = player.rect.right
        
-
     def vertical_movement_collision(self):
+        #checks for verticle collision between player and palm, terrian, crates
         player = self.player.sprite
         player.apply_gravity()
         collidable_sprites = self.terrain_sprites.sprites() + self.crate_sprites.sprites() + self.fg_palm_sprites.sprites()
@@ -245,20 +248,24 @@ class Level:
                     player.on_ground = True
                     
         if player.on_ground and player.direction.y < 0 or player.direction.y > 1:
-            '''checking if player is jumping or falling and switching of on ground'''
+            #checking if player is jumping or falling and switching off on ground
             player.on_ground = False
      
     def check_death(self):
+        #checks if player has fallen below bottom of screen
         if self.player.sprite.rect.top > screen_height:
             self.create_overworld(self.current_level)
         
     def check_win(self):
+        #checks if player has collided with hat/end sprite
         if pygame.sprite.spritecollide(self.player.sprite, self.goal, False):
             self.current_level += 1 
+            #pause before launching overworld
             sleep(.5)
             self.create_overworld(self.current_level)
         
     def check_coin_collisions(self):
+        #checks if player collides with coins and calls the function to add to coin total
         collided_coins = pygame.sprite.spritecollide(self.player.sprite, self.coin_sprites, True)
         if collided_coins:
             self.coin_sound.play()
@@ -266,6 +273,7 @@ class Level:
                 self.change_coins(coin.value)
         
     def check_enemy_collisons(self):
+        #check for collision between player and enemy
         enemy_collisions = pygame.sprite.spritecollide(self.player.sprite, self.enemy_sprites, False)
         
         if enemy_collisions:
@@ -273,7 +281,9 @@ class Level:
                 self.stomp_sound.play()
                 enemy_center = enemy.rect.centery
                 enemy_top = enemy.rect.top
-                player_bottom = self.player.sprite.rect.bottom   
+                player_bottom = self.player.sprite.rect.bottom 
+                #checks if player is on top of enemy and palyer is moving down onto enemy
+                #if yes, player kills enemy, if not -enemy damages player  
                 if enemy_top < player_bottom < enemy_center and self.player.sprite.direction.y >= 0:
                     self.player.sprite.direction.y = -15
                     explosion_sprite = ParticleEffect(enemy.rect.center, 'explode')
@@ -281,26 +291,22 @@ class Level:
                     enemy.kill()
                 else:
                     self.player.sprite.get_damage()
-                        
-                
-                    
-                    
                       
     def run(self):
+        #level checks
         self.check_win()
         self.check_death()
         self.level_switch()
+        
         #sky
         self.sky.draw(self.display_surface)
         self.clouds.draw(self.display_surface, self.world_shift)
-        
         
         #palms background
         self.bg_palm_sprites.update(self.world_shift)
         self.bg_palm_sprites.draw(self.display_surface)
 
-        #level tiles (vid1)
-        #remove? tiles.update
+        #level tiles 
         self.tiles.update(self.world_shift)
         self.terrain_sprites.draw(self.display_surface)
         
@@ -324,11 +330,9 @@ class Level:
         self.grass_sprites.update(self.world_shift)
         self.grass_sprites.draw(self.display_surface)
 
-        #self.tiles.draw(self.display_surface)
-        #vid2
+        #terrain
         self.terrain_sprites.update(self.world_shift)
         self.terrain_sprites.draw(self.display_surface)
-        
         
         #coins
         self.coin_sprites.update(self.world_shift)
@@ -341,13 +345,10 @@ class Level:
         #goal sprite
         self.goal.update(self.world_shift)
         self.goal.draw(self.display_surface)
-        
-       
-
+    
+        #player collision
         self.check_coin_collisions()
         self.check_enemy_collisons()
-        
-
 
         #player sprite
         self.player.update()
@@ -361,6 +362,5 @@ class Level:
         #water
         self.water.draw(self.display_surface, self.world_shift)
         
+        #draw player
         self.player.draw(self.display_surface)
-        
-        
