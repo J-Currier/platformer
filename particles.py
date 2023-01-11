@@ -3,6 +3,7 @@ from support import import_folder
 from os import path
 
 class ParticleEffect(pygame.sprite.Sprite):
+    #class for particle effects
     def __init__(self, pos, type):
         super().__init__()
         self.frame_index = 0
@@ -20,6 +21,7 @@ class ParticleEffect(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center = pos)
         
     def animate(self):
+        #animates the particles
         self.frame_index += self.animation_speed
         if self.frame_index >= len(self.frames):
             self.kill() #destoys sprite when animation ends
@@ -29,7 +31,3 @@ class ParticleEffect(pygame.sprite.Sprite):
     def update(self, x_shift):
         self.animate()
         self.rect.x += x_shift
-
-            
-    
-
