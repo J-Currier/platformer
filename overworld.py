@@ -70,8 +70,6 @@ class Overworld:
         self.allow_input = False
         self.timer_length = 300
         
-        
-        
     def setup_nodes(self):
         #creates level nodes and either locks or opens them based on current level completed
         self.nodes = pygame.sprite.Group()
@@ -126,7 +124,6 @@ class Overworld:
         
         return (end - start).normalize()
         
-    
     def update_icon_pos(self):
         #moves icon from one level node to another after player presses key
         if self.moving and self.move_direction:
@@ -137,11 +134,11 @@ class Overworld:
                 self.move_direction = pygame.math.Vector2(0, 0)
 
     def input_timer(self):
+        #creates a pause/no input time after overworld created 
         if not self.allow_input:
             current_time = pygame.time.get_ticks()
             if current_time >= self.start_time + self.timer_length:
                 self.allow_input = True
-                   
     
     def run(self):
         self.input_timer()
@@ -153,6 +150,3 @@ class Overworld:
         self.draw_paths()
         self.nodes.draw(self.display_surface)
         self.icon.draw(self.display_surface)
-        
-        
-        
