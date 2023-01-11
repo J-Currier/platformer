@@ -1,15 +1,12 @@
 import pygame, sys
 from settings import *
-from tiles import Tile
 from level import Level
 from overworld import Overworld
 from ui import UI
 from os import path
 
-
 class Game:
     def __init__(self):
-        
         #game attributes
         self.max_level = 0
         self.max_health = 100
@@ -28,22 +25,19 @@ class Game:
         if self.play_music:
             self.overworld_bg_music.play(loops = -1)
             
-        
         #UI 
         self.ui = UI(screen)
         
-        
-        
-
     def create_level(self, current_level):
+        #creates level from overworld
         self.level = Level(current_level, screen, self.create_overworld, self.change_coins, self.change_health)
         self.status = 'level'
         self.overworld_bg_music.stop()
         if self.play_music:
             self.level_bg_music.play(loops = -1)
 
-    
     def create_overworld(self, level_pos):
+        #creates overwolrd from level
         self.level_bg_music.stop()
         if self.play_music:
             self.overworld_bg_music.play(loops = -1)
@@ -59,12 +53,15 @@ class Game:
         self.status = 'overworld'
 
     def change_coins(self, amount):
+        #adds to coin total
         self.coins += amount    
         
     def change_health(self, amount ):
+        #changes health status
         self.current_health += amount    
         
     def check_game_over(self):
+        #checks if health has reached 0
         if self.current_health <= 0:
             self.current_health = 100
             self.coins = 0
@@ -75,18 +72,13 @@ class Game:
             if self.play_music:
                 self.overworld_bg_music.play(loops = -1)
                 
-                
     '''def toggle_audio():
         keys = pygame.key.get_pressed()
         
         if keys[pygame.K_x]:'''
-
-
-
-            
         
-              
     def run(self):
+        #runs game
         if self.status == 'overworld':
             self.overworld.run()   
         else:
@@ -107,8 +99,6 @@ while True:
             pygame.quit()
             sys.exit()
             
-    screen.fill('black')
     game.run()
-    
     pygame.display.update()
-    clock.tick(60)
+    clock.tick(60) #60 frames for second
