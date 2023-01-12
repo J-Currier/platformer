@@ -75,8 +75,7 @@ class Overworld:
         self.nodes = pygame.sprite.Group()
         for index, node_data in enumerate(levels.values()):
             if index <= self.max_level:
-                print(node_data['node_graphics'], 'node data')
-                node_sprite = Node(node_data['node_pos'], 'available', self.speed, node_data['node_graphics']) #*******         
+                node_sprite = Node(node_data['node_pos'], 'available', self.speed, node_data['node_graphics'])         
             else:
                 node_sprite = Node(node_data['node_pos'], 'locked', self.speed, node_data['node_graphics'])
             self.nodes.add(node_sprite)

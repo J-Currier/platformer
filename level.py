@@ -130,7 +130,6 @@ class Level:
                         if item == '0':
                             sprite = Palm((x, y), tile_size, 38, 'graphics', 'terrain', 'palm_small')
                         if item == '1':
-                            print('largepalm ln93 level')
                             sprite = Palm((x, y), tile_size, 64, 'graphics', 'terrain', 'palm_large')
                             
                     if type == 'bg_palms':

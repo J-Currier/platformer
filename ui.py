@@ -3,7 +3,6 @@ from os import path
 
 class UI:
     def __init__(self, surface):
-        
         #setup
         self.display_surface = surface
         self.health_bar = pygame.image.load(path.join('graphics', 'ui', 'health_bar.png')).convert_alpha()
@@ -18,6 +17,7 @@ class UI:
         self.font = pygame.font.Font(myfont, 30)
         
     def show_health(self, current, full):
+        #shows health bar and health percnetage
         self.display_surface.blit(self.health_bar, (20, 10))
         current_health_ratio = current / full
         current_bar_width = self.bar_max_width * current_health_ratio
@@ -25,6 +25,7 @@ class UI:
         pygame.draw.rect(self.display_surface, '#dc4949', health_bar_rect)
     
     def show_coins(self, amount):
+        #shoes coin total
         self.display_surface.blit(self.coin, self.coin_rect)
         coin_amount_surf = self.font.render(str(amount), False, '#33323d')
         coin_amount_rect = coin_amount_surf.get_rect(midleft = (self.coin_rect.right + 4, self.coin_rect.centery))
