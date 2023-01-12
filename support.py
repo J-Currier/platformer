@@ -1,28 +1,21 @@
 import os
-#from os import walk
-#used to import folders using a file system (walk)
-#walk returns the directory path, directory names, filenames
 import pygame
 from csv import reader
 from settings import tile_size
 
 def import_folder(path):
+    #import images, put on surface, place the surface in a list, return list
     surface_list = []
 
     for _, __, img_file in os.walk(path):
         for image in img_file:
-            ''' import images, put on surface, place the surface in a list, return list'''
             full_path = os.path.join(path, image)
-            #full_path = path + '/' + image
             my_surface = pygame.image.load(full_path).convert_alpha()
-            #use convert alpha on png files
             surface_list.append(my_surface)
     return surface_list
  
-
- 
-       
 def import_csv_layout(myList):
+    #imports the csv file for the level layout
     path = os.path.join(*myList)
     terrain_map = []
     with open(path) as map:
@@ -32,10 +25,11 @@ def import_csv_layout(myList):
         return terrain_map
                     
 def import_cut_graphics(*my_path):
+    #slices png file into correctly sized image tiles
     new_path = ''
     for x in my_path:
         new_path = os.path.join(new_path, x)   
-    surface = pygame.image.load(new_path).convert_alpha() #LU
+    surface = pygame.image.load(new_path).convert_alpha()
     tile_num_x = int(surface.get_size()[0]/tile_size)
     tile_num_y = int(surface.get_size()[1]/tile_size)
     
