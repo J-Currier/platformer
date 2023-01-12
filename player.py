@@ -4,6 +4,7 @@ from os import path
 from math import sin
 
 class Player(pygame.sprite.Sprite):
+    #class for the player
     def __init__(self, pos, surface, create_jump_particles, change_health):
         super().__init__()
         self.import_character_assests()
@@ -16,7 +17,6 @@ class Player(pygame.sprite.Sprite):
         self.invincible = False
         self.invincible_duration = 500
         self.hurt_time = 0
-        
  
         #dust particles       
         self.import_dust_run_particles()
@@ -45,8 +45,8 @@ class Player(pygame.sprite.Sprite):
         self.hit_sound = pygame.mixer.Sound(path.join('audio', 'effects', 'hit.wav'))
         
     def import_character_assests(self):
+        #imports the animation frames
         my_path = path.join("graphics", "character")
-        #character_path = '../graphics/character/'#changed
         self.animations = {'idle':[],
                            'run':[], 
                            'jump':[], 
@@ -54,16 +54,15 @@ class Player(pygame.sprite.Sprite):
         
         for animation in self.animations.keys():
             my_full_path = path.join(my_path, animation)
-            print(my_full_path, "myfullpath")
-            #full_path = character_path + animation
             self.animations[animation] = import_folder(my_full_path)
 
     def import_dust_run_particles(self):
+        #imports the running dust particles
         my_path = path.join("graphics", "character", "dust_particles", "run")
         self.dust_run_particles = import_folder(my_path)
             
-            
     def animate(self): 
+        #animate player movements
         animation = self.animations[self.status]
         
         #loop over frame index
@@ -73,11 +72,12 @@ class Player(pygame.sprite.Sprite):
         
         image = animation[int(self.frame_index)]
         
+        #flips player left right
         if self.facing_right:
             self.image = image
             self.rect.bottomleft = self.collision_rect.bottomleft
         else: 
-            flipped_image = pygame.transform.flip(image, True, False) #(surface, flip horiz., flip vert.)
+            flipped_image = pygame.transform.flip(image, True, False) 
             self.image = flipped_image
             self.rect.bottomright = self.collision_rect.bottomright
         
@@ -92,6 +92,7 @@ class Player(pygame.sprite.Sprite):
             
             
     def run_dust_animation(self):
+        #dust animation for when the player is running
         if self.status == 'run' and self.on_ground:
             self.dust_frame_index +=  self.dust_animation_speed
             if self.dust_frame_index >= len(self.dust_run_particles):
@@ -109,6 +110,7 @@ class Player(pygame.sprite.Sprite):
                 self.display_surface.blit(flipped_dust, pos)
                 
     def get_input(self):
+        #checks for user input for player motion
         keys = pygame.key.get_pressed()
         
         if keys[pygame.K_RIGHT]:
@@ -125,6 +127,7 @@ class Player(pygame.sprite.Sprite):
             self.create_jump_particles(self.rect.midbottom)
     
     def get_status(self):
+        #checks what the player motion is
         if self.direction.y < 0:
             self.status = 'jump'
         elif self.direction.y > 1:
@@ -136,14 +139,17 @@ class Player(pygame.sprite.Sprite):
                 self.status = 'idle' 
             
     def apply_gravity(self):
+        #applies gravity to player movement
         self.direction.y += self.gravity #makes gravity increase every frame
         self.collision_rect.y += self.direction.y
     
     def jump(self):
+        #makes player jump once ump key is pressed
         self.direction.y = self.jump_speed
         self.jump_sound.play()
         
     def get_damage(self):
+        #manages mechanics when player hit by enemy (lowering health, setting flicker status, sound)
         if not self.invincible: 
             self.hit_sound.play()  
             self.change_health(-10)
@@ -151,6 +157,7 @@ class Player(pygame.sprite.Sprite):
             self.hurt_time = pygame.time.get_ticks()
             
     def invincible_timer(self):
+        #switches off invincibility from enemy hit
         if self.invincible:
             current_time = pygame.time.get_ticks()
             if current_time >= self.hurt_time + self.invincible_duration:
@@ -165,6 +172,7 @@ class Player(pygame.sprite.Sprite):
             return 0
                  
     def update(self):
+        #calls player functions
         self.get_input()
         self.get_status()
         self.animate()

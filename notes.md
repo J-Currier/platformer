@@ -112,7 +112,7 @@ add in horizon variable for init method sky and clouds (and maybe water?) in lev
 
 
 
-follwo up to do's
+follow up to do's
 edit setup level func in level.py
 removed from level.py set up level function
         '''for row_index, row in enumerate(layout):
@@ -126,3 +126,5 @@ removed from level.py set up level function
                 if cell == 'P':
                     player_sprite = Player((x, y), self.display_surface, self.create_jump_particles) #LU passing a method to a child
                     self.player.add(player_sprite)'''
+
+player.py =run dust particles-? can this be handled by dust particle animation? 
